@@ -14,7 +14,8 @@
     "eofline": true,
     "forin": true,
     "import-blacklist": [
-      true
+      true,
+      "rxjs"
     ],
     "import-spacing": true,
     "indent": [
@@ -134,6 +135,8 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
+    "no-access-missing-member": true,
+    "templates-use-public": true,
     "invoke-injectable": true
   }
 }

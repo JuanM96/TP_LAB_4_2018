@@ -1,0 +1,64 @@
+<!--div>
+    <button routerLink="/Principal">Principal</button>
+    <button (click)="Juego('Adivina')">Adivina</button>
+    <button (click)="Juego('Agilidad')">Agilidad</button>
+    <button (click)="Juego('AdivinaMasListado')">Adivina+listado</button>
+    <button (click)="Juego('AgilidadaMasListado')">Agilidad+listado</button>  
+    <button routerLink="/error">Error</button>
+  
+</div-->
+
+<!--nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" routerLink="/Principal">Inicio</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a routerLink="/Juegos">Juegos</a></li>
+        <li><a data-toggle="tooltip" title="Hooray!" (click)="Juego('Adivina')">Adivina</a></li>
+        <li><a  (click)="Juego('Agilidad')">Agilidad</a></li>
+        <li><a  (click)="Juego('AdivinaMasListado')">Adivina+listado</a></li>
+        <li><a  (click)="Juego('AgilidadaMasListado')">Agilidad+listado</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mis Datos</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+        </ul>
+    </div>
+  </nav-->
+  <nav class="navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+                                  
+          </button>
+          <a class="navbar-brand" routerLink="/Remiseria">Inicio</a>
+          <!-- <button mat-raised-button color="warn" class="navbar-button" routerLink="/Juegos">Inicio</button> -->
+          
+        </div>
+        <div class="collapse navbar-collapse nav navbar-nav" id="myNavbar">
+             <ul class="nav navbar-nav">
+                <li><a   class="navbar-button" routerLink="/Remiseria/abmChoferes">Choferes</a></li>
+                <li><a   class="navbar-button" routerLink="" (click)="Juego('Adivina')">Adivina</a></li>
+                <li><a    class="navbar-button" routerLink="" (click)="Juego('Agilidad')">Agilidad</a></li>
+                <li><a    class="navbar-button" routerLink="" (click)="Juego('Anagrama')">Anagrama</a></li>
+                <li><a    class="navbar-button" routerLink=""(click)="Juego('PiedraPapelTijera')">Piedra, Papel Y Tijera</a></li>
+                <li><a    class="navbar-button" routerLink=""(click)="Juego('TicTacToe')">Tic Tac Toe</a></li>
+                <li><a    class="navbar-button" routerLink=""(click)="Juego('Historial')">Historial De Jugadas</a></li>
+
+              </ul>
+              <ul class="nav navbar-nav navbar-right no-margin">  
+                <li><a    class="navbar-button-right" routerLink="" (click)="Juego('QuienSoy')">Quien Soy?</a></li>
+                <li><a    class="navbar-button-right" routerLink="" (click)="Salir()">Salir</a></li>
+                </ul>
+          <!-- <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Adivina')">Adivina</button>
+          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Agilidad')">Agilidad</button>
+          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Anagrama')">Anagrama</button>
+          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('PiedraPapelTijera')">Piedra, Papel Y Tijera</button>
+          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('TicTacToe')">Tic Tac Toe</button>
+          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Historial')">Historial De Jugadas</button>
+          <button mat-raised-button color="warn" class="navbar-button" (click)="Salir()">Salir</button> -->
+        </div>
+      </div>
+    </nav>

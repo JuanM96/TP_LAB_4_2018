@@ -1,0 +1,40 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!--app-menu></app-menu-->
+<!-- index.html -->
+
+
+<!-- <form name="juego">
+<ul>
+   <li>
+   <h1>Resuelve: {{nuevoJuego.numero1}} {{nuevoJuego.operador}} {{nuevoJuego.numero2}}</h1>
+  </li>
+  <li>
+    Respuesta: <input [(ngModel)]="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%"/>
+     
+   </li>
+  <li>
+    <h2 [hidden]="ocultarVerificar" ><button (click)="verificar()" class="btn btn-success btn-lg">Verificar {{Tiempo}} </button></h2>
+  </li>
+  <li>
+    <h2 [hidden]="!ocultarVerificar"><button  (click)="NuevoJuego()"  class="btn btn-info btn-lg">Nuevo</button></h2>
+  </li>
+  <li>
+    <h2><p><i class="fa fa-spinner fa-spin"></i>Esperando numero...</p></h2>
+
+  </li>
+</ul>
+
+</form> -->
+<h1 style="text-align: center;">Agilidad Aritmetica!</h1>
+<form name="juego">
+    <div *ngIf="nuevoJuego.juegoEmpezado ">
+      <h1>Resuelve: {{nuevoJuego.numero1}} {{nuevoJuego.operador}} {{nuevoJuego.numero2}}</h1>
+      <label>Respuesta:  </label>  <input [(ngModel)]="respuesta" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%"/>
+    </div>
+      <h2><button mat-raised-button color="warn" *ngIf="nuevoJuego.juegoEmpezado " (click)="verificar()" class="btn-lg">Verificar {{Tiempo}}</button></h2>
+      <h2><button mat-raised-button color="warn" *ngIf="!nuevoJuego.juegoEmpezado " (click)="NuevoJuego()"  class="btn-lg">Empezar Juego</button></h2>
+      <h3 [hidden]="ocultarVerificar" *ngIf="nuevoJuego.gano ">Felicidades Usted Gano!</h3>
+      <h3 *ngIf="nuevoJuego.juegoEmpezado ">Usted Aun No Gano</h3>
+      <h3 [hidden]="ocultarVerificar" *ngIf="!nuevoJuego.gano ">Usted Perdio!</h3>
+  
+  </form>

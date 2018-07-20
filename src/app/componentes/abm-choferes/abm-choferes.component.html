@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Listado De Todos Los Choferes</h1>
+  <div class="tabla">
+    <ng2-smart-table [settings]="settings" [source]="listado" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table> 
+  </div>
+  <button mat-raised-button color="primary" (click)="ver()">VER</button>
+</div>
+
+<!-- (create)="OnCreate($event)" (edit)="OnEdit($event)" (delete)="OnDelete($event)" -->

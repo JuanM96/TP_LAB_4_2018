@@ -1,0 +1,30 @@
+<h1 style="text-align: center;">Piedra, Papel y Tijera!</h1>
+<form name="juego">
+    <div *ngIf="miJuego.juegoEmpezado">
+      <h1 align=center>Elige Una Opcion!</h1>
+      <ul align=center>
+        <li>
+          <button (click)="verificar(1)"><img src="./assets/imagenes/piedra.png" alt="" width="100px"></button>
+          <button (click)="verificar(2)"><img src="./assets/imagenes/papel.png" alt="" width="100px"></button>
+          <button (click)="verificar(3)"><img src="./assets/imagenes/tijeras.png" alt="" width="100px"></button>
+        </li>
+        <li>
+            
+            <img src="./assets/imagenes/piedra.png" alt="" width="100px" *ngIf="respuesta == 1">
+            <img src="./assets/imagenes/papel.png" alt="" width="100px" *ngIf="respuesta == 2">
+            <img src="./assets/imagenes/tijeras.png" alt="" width="100px" *ngIf="respuesta == 3">
+            <h4 *ngIf="respuesta != 0">JUGADOR</h4>
+            <h4 *ngIf="respuesta != 0">VS</h4>
+            <h4 *ngIf="respuesta != 0">CPU</h4>
+            <img src="./assets/imagenes/piedra.png" alt="" width="100px" *ngIf="miJuego.valorJugado == 1">
+            <img src="./assets/imagenes/papel.png" alt="" width="100px" *ngIf="miJuego.valorJugado == 2">
+            <img src="./assets/imagenes/tijeras.png" alt="" width="100px" *ngIf="miJuego.valorJugado == 3">
+
+        </li>
+      </ul>
+    </div>
+      <h2><button mat-raised-button color="warn" *ngIf="!miJuego.juegoEmpezado" (click)="nuevoJuego()"  class="btn-lg button-long">Empezar Juego</button></h2>
+      <h3 [hidden]="ocultar" *ngIf="miJuego.resultado == 'Ganaste'" align=center>Felicidades Usted Gano!</h3>
+      <h3 [hidden]="ocultar" *ngIf="miJuego.resultado == 'Perdiste'" align=center>Usted Perdio!</h3>
+      <h3 [hidden]="ocultar" *ngIf="miJuego.resultado == 'Empate'" align=center>Empate!</h3>
+</form>

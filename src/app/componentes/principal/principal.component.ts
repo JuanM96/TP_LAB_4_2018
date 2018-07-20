@@ -1,0 +1,74 @@
+import { Component, OnInit } from '@angular/core';
+import { MiHttpService } from '../../servicios/mi-http.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {MatSnackBar} from '@angular/material';
+@Component({
+  selector: 'app-principal',
+  templateUrl: './principal.component.html',
+  styleUrls: ['./principal.component.css']
+})
+export class PrincipalComponent implements OnInit {
+  public status: any = {
+    isFirstOpen: true,
+    isFirstDisabled: false
+  };
+  sexos: string[] = ['Masculino', 'Femenino'];
+  usuarioLogIn:any={
+    usuario:"",
+    password:""
+  }
+  usuarioSignUp:any={
+    nombre:"",
+    sexo:"",
+    usuario:"",
+    password:"",
+    perfil:"cliente",
+    habilitado:1,
+    idVehiculo:0,
+    estado:"Habilitado"
+  }
+  constructor(public miHttp:MiHttpService,private route: ActivatedRoute,private router: Router,public snackBar: MatSnackBar) {  }
+
+  ngOnInit() {
+  }
+  LogIn(){
+    console.log(JSON.stringify(this.usuarioLogIn));
+    this.miHttp.httpPostPromise("http://localhost"/*:8080*/+"/apiRestRemis/ingreso/logIn",this.usuarioLogIn)
+    .then(datos => {
+      //console.info(datos);
+      console.log(JSON.stringify(datos));
+      if (datos['logIn']) {
+        localStorage.setItem("token",datos["token"]);
+        localStorage.setItem("usuario",datos["usuario"]["usuario"]);
+        localStorage.setItem("nombre",datos["usuario"]["nombre"]);
+        localStorage.setItem("perfil",datos["usuario"]["perfil"]);
+        localStorage.setItem('isLoggedin', 'true');
+        this.router.navigate(['/Remiseria']);
+      }
+      else{
+        console.log(datos);
+        this.openSnackBar("ERROR, Usuario o Contraseña Incorrectos");
+      }
+    })
+    .catch(error => {console.log(error)});
+  }
+  SignUp(){
+     this.miHttp.httpPostPromise("http://localhost"/*:8080*/+"/apiRestRemis/ingreso/registro",this.usuarioSignUp)
+    .then(datos => {
+      console.log(JSON.stringify(datos));
+      this.openSnackBar(datos["respuesta"]);
+    })
+    .catch(error => {console.log(error)});
+  }
+  LogInTest(){
+    this.usuarioLogIn.usuario = "admin";
+    this.usuarioLogIn.password = "123";
+    this.LogIn();
+  }
+  openSnackBar(msg:string) {
+    this.snackBar.open(msg,'OK',{duration:3000});
+    /*this.snackBar.openFromComponent(PizzaPartyComponent, {
+      duration: 500,
+    });*/
+  }
+}

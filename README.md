@@ -1,5 +1,8 @@
-# TP_LAB_4_2018
-TP de laboratorio 4
+# TP_LAV4_2017
+Ejercicio de practica para angular 2/4
 
-# Form de inscripción
-https://goo.gl/forms/K1doX8Bu7E38DjVC3
+
+https://octaviovillegas.github.io/TP_LAV4_2017/
+
+
+ ng build --prod --no-aot

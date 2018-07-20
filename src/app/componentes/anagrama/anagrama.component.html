@@ -1,0 +1,12 @@
+<h1 style="text-align: center;">Anagrama!</h1>
+<form name="juego">
+    <div *ngIf="miJuego.juegoEmpezado">
+      <h1 style="text-align: center;">{{miJuego.palabraMezclada}}</h1>
+      <label>Respuesta:  </label>  <input [(ngModel)]="respuesta" placeholder="Ingrese una palabra" name="palabraIngresada" type="text" class="form-control" style="width:50%"/>
+    </div>
+      <h2><button mat-raised-button color="warn" *ngIf="miJuego.juegoEmpezado" (click)="verificar()" class="btn-lg">Verificar</button></h2>
+      <h2><button mat-raised-button color="warn" *ngIf="!miJuego.juegoEmpezado" (click)="nuevoJuego()"  class="btn-lg">Empezar Juego</button></h2>
+      <h3 [hidden]="ocultar" *ngIf="miJuego.gano">Felicidades Usted Gano!</h3>
+      <h3 [hidden]="ocultar" *ngIf="!miJuego.gano">Usted Perdio! La Palabra era: {{solucion}}</h3>
+</form>
+

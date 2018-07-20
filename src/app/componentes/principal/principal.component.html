@@ -1,0 +1,153 @@
+<!-- <app-cabecera></app-cabecera>
+
+
+
+ 
+<div class="container" >
+   
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-danger">
+           
+                <div class="media-body">
+                    <div class="hero-text">
+                        <h4 >Menú Principal</h4>
+                    </div>
+                 </div>
+               
+             
+          </li>
+        <li class="list-group-item list-group-item-success">
+          <a routerLink="/Juegos">
+            <div class="media">
+              <div class="media-left">
+                    <img src="../assets/imagenes/saladejuegos.png" class="media-object imagenDeMenu" >
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">Juegos</h4>
+                <p>El método lúdico es un conjunto de estrategias diseñadas para crear un ambiente de armonía en los estudiantes que están inmersos en el proceso de aprendizaje. Este método busca que los alumnos se apropien de los temas impartidos por los docentes utilizando el juego.</p>
+              </div>
+             
+            </div> 
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-info">
+            <a routerLink="/Listado">
+              <div class="media">
+                  <div class="media-left">
+                      <img src="../assets/imagenes/listado.jpg" class="media-object imagenDeMenu" >
+                    </div>
+                <div class="media-body">
+                  <h4 class="media-heading">Listados de resultados</h4>
+                  <p>Los listados de los resultados con ordenamiento y busqueda</p>
+                </div>
+                
+              </div> 
+            </a>
+          </li>
+        <li class="list-group-item list-group-item-warning">
+          <a routerLink="/Juegos">
+            <div class="media">
+                <div class="media-left">
+                    <img src="../assets/imagenes/Configuracion.png" class="media-object imagenDeMenu" >
+                  </div>
+              <div class="media-body">
+                <h4 class="media-heading">Configuraci&oacute;n</h4>
+                <p>Ajustes de la aplicacion y los métodos de autentificación</p>
+              </div>
+             
+            </div> 
+          </a>
+        </li>
+       
+        
+      </ul>
+</div> -->
+<div class="back-color">
+  <div class="top-content">
+    <div class="inner-bg">
+      <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text info">
+                <h1><strong>Remiseria Humberto</strong></h1>
+                <div class="description">
+                  <p>
+                      Pagina Realizada por Juan Ignacio Murcia
+                  </p>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5">
+                <div class="form-box">
+                  <div class="form-top">
+                      <div class="form-top-left">
+                        <h3>Ingresar Aqui!</h3>
+                      </div>
+                      <div class="form-top-right">
+                        <i class="fa fa-lock"></i>
+                      </div>
+                  </div>
+                  <div class="form-bottom">
+                      <div class="login-form">
+                        <div class="form-group">
+                            <label class="sr-only" for="form-username">Username</label>
+                            <input type="text" name="form-username" [(ngModel)]="usuarioLogIn.usuario" [ngModelOptions]="{standalone: true}" placeholder="Username..." class="form-username form-control" id="form-username">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-password">Password</label>
+                            <input type="password" name="form-password" [(ngModel)]="usuarioLogIn.password" [ngModelOptions]="{standalone: true}" placeholder="Password..." class="form-password form-control" id="form-password">
+                        </div>
+                        <button mat-raised-button color="warn" (click)="LogIn()">Ingresar</button>
+                        <button mat-raised-button color="warn" (click)="LogInTest()">IngresarAdmin</button>
+                        
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-sm-1 middle-border"></div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5">
+                <div class="form-box">
+                  <div class="form-top">
+                      <div class="form-top-left">
+                        <h3>Registrate Ahora Como cliente!</h3>
+                        <p>Rellena los campos de abajo</p>
+                      </div>
+                      <div class="form-top-right">
+                        <i class="fa fa-pencil"></i>
+                      </div>
+                  </div>
+                  <div class="form-bottom">
+                      <div class="registration-form">
+                        <div class="form-group">
+                            <label class="sr-only" for="form-first-name">Nombre</label>
+                            <input type="text" name="form-nombre" [(ngModel)]="usuarioSignUp.nombre" [ngModelOptions]="{standalone: true}" placeholder="Nombre..." class="form-email form-control" id="form-nombre">
+                        </div>
+                        <div class="form-group">
+                          <label class="sr-only" for="form-first-name">Sexo</label>
+                          <!-- <input type="text" name="form-sexo" [(ngModel)]="usuarioSignUp.sexo" [ngModelOptions]="{standalone: true}" placeholder="Sexo..." class="form-email form-control" id="form-sexo"> -->
+                          <mat-radio-group class="radioGroup" [(ngModel)]="usuarioSignUp.sexo"> Sexo:
+                            <mat-radio-button class="itemRadio" *ngFor="let sexo of sexos" [value]="sexo" color="warn">
+                              {{sexo}}
+                            </mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-first-name">Usuario</label>
+                            <input type="text" name="form-first-name" [(ngModel)]="usuarioSignUp.usuario" [ngModelOptions]="{standalone: true}" placeholder="Usuario..." class="form-first-name form-control" id="form-first-name">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-last-name">Password</label>
+                            <input type="password" name="form-last-name" [(ngModel)]="usuarioSignUp.password" [ngModelOptions]="{standalone: true}" placeholder="Password..." class="form-last-name form-control" id="form-last-name">
+                        </div>
+                        
+                            <button mat-raised-button color="warn"(click)="SignUp()">Registrarse</button>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

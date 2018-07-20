@@ -1,0 +1,10 @@
+[{"nombre":"Natividad","juego":"VelocidadAritmetica","resultado":false},
+{"nombre":"Roldan","juego":"AdivinaElNumero","resultado":true},
+{"nombre":"Elset","juego":"Anagrama","resultado":false},
+{"nombre":"Naomi","juego":"VelocidadAritmetica","resultado":false},
+{"nombre":"Karim","juego":"Anagrama","resultado":false},
+{"nombre":"Adam","juego":"VelocidadAritmetica","resultado":false},
+{"nombre":"Clayborn","juego":"AdivinaElNumero","resultado":false},
+{"nombre":"Hedvig","juego":"Anagrama","resultado":false},
+{"nombre":"Aurie","juego":"AdivinaElNumero","resultado":false},
+{"nombre":"Celestina","juego":"VelocidadAritmetica","resultado":true}]

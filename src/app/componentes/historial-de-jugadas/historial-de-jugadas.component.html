@@ -1,0 +1,19 @@
+<button mat-raised-button color="warn" (click)="Actualizar()">Actualizar</button>
+<!-- <table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Juego</th>
+      <th>Jugador</th>
+      <th>Resultado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let partida of listado">
+      <td>{{partida.juego}} </td>
+      <td>{{partida.nombreUsuario}} </td>
+      <td>{{partida.resultado}}</td>
+    </tr>
+   
+  </tbody>
+</table> -->
+<ng2-smart-table [settings]="settings" [source]="listado"></ng2-smart-table>

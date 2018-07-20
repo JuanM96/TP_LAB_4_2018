@@ -1,0 +1,52 @@
+.imagenDeQuienSoy{
+    width: 100%;
+   
+    }
+body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+}
+p {
+    font-size: 16px;
+    text-align: center;
+    align-content: center;
+}
+.p-center{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:flex-end !important;
+}
+.margin {margin-bottom: 45px;}
+.bg-1 { 
+    background-color: brown; /* Green */
+    color: #ffffff;
+}
+.bg-2 { 
+    background-color: brown; /* Dark Blue */
+    color: #ffffff;
+}
+.bg-3 { 
+    background-color: brown; /* White */
+    color: white;
+}
+.bg-4 { 
+    background-color: brown; /* Black Gray */
+    color: #fff;
+}
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
