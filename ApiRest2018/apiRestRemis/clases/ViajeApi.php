@@ -41,13 +41,19 @@ class ViajeApi
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(viaje::TraerViajesPorId($ArrayDeParametros['id']));
     }
+    public function RealizarEncuesta($request, $response, $args){
+        $ArrayDeParametros = $request->getParsedBody();
+        return $response->withJson(viaje::RealizarEncuesta($ArrayDeParametros['idViaje']));
+    }
     public function FinalizarElViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(viaje::FinalizarViaje($ArrayDeParametros['idViaje'],$ArrayDeParametros['monto']));
-    }public function AsignarElChofer($request, $response, $args){
+    }
+    public function AsignarElChofer($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(viaje::AsignarChofer($ArrayDeParametros['idViaje'],$ArrayDeParametros['idChofer']));
-    }public function CancelarElViaje($request, $response, $args){
+    }
+    public function CancelarElViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(viaje::CancelarViaje($ArrayDeParametros['idViaje']));
     }

@@ -8,6 +8,12 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit {
+  public theme = 'dark';
+  public size = 'normal';
+  public lang = 'es';
+  public type= 'image';
+  public captchaSuccess:boolean;
+  public captchaResponse:string;
   public status: any = {
     isFirstOpen: true,
     isFirstDisabled: false
@@ -27,7 +33,9 @@ export class PrincipalComponent implements OnInit {
     idVehiculo:0,
     estado:"Habilitado"
   }
-  constructor(public miHttp:MiHttpService,private route: ActivatedRoute,private router: Router,public snackBar: MatSnackBar) {  }
+  constructor(public miHttp:MiHttpService,private route: ActivatedRoute,private router: Router,public snackBar: MatSnackBar) {
+    this.captchaSuccess = false;
+    }
 
   ngOnInit() {
   }
@@ -53,22 +61,60 @@ export class PrincipalComponent implements OnInit {
     .catch(error => {console.log(error)});
   }
   SignUp(){
-     this.miHttp.httpPostPromise("http://localhost"/*:8080*/+"/apiRestRemis/ingreso/registro",this.usuarioSignUp)
-    .then(datos => {
-      console.log(JSON.stringify(datos));
-      this.openSnackBar(datos["respuesta"]);
-    })
-    .catch(error => {console.log(error)});
+    if (this.usuarioSignUp.nombre != "" && this.usuarioSignUp.sexo != "" && this.usuarioSignUp.usuario != "" && this.usuarioSignUp.password != "") {
+      this.miHttp.httpPostPromise("http://localhost"/*:8080*/+"/apiRestRemis/ingreso/registro",this.usuarioSignUp)
+      .then(datos => {
+        console.log(JSON.stringify(datos));
+        this.openSnackBar(datos["respuesta"]);
+      })
+      .catch(error => {console.log(error)});
+    }
+    else{
+      this.openSnackBar("ERROR,No deje campos vacios");
+    }
+    
   }
-  LogInTest(){
-    this.usuarioLogIn.usuario = "admin";
-    this.usuarioLogIn.password = "123";
-    this.LogIn();
+  LogInTest(perfil:string){
+    switch (perfil) {
+      case "admin":
+        this.usuarioLogIn.usuario = "admin";
+        this.usuarioLogIn.password = "123";
+        this.LogIn();
+        break;
+      case "cliente":
+        this.usuarioLogIn.usuario = "juanik";
+        this.usuarioLogIn.password = "123";
+        this.LogIn();
+        break;
+      case "chofer":
+        this.usuarioLogIn.usuario = "garrot2";
+        this.usuarioLogIn.password = "123";
+        this.LogIn();
+        break;
+      default:
+        break;
+    }
+    
   }
   openSnackBar(msg:string) {
     this.snackBar.open(msg,'OK',{duration:3000});
     /*this.snackBar.openFromComponent(PizzaPartyComponent, {
       duration: 500,
     });*/
+  }
+
+  handleSuccess(captchaResponse: string): void {
+    this.captchaSuccess = true;
+    this.captchaResponse = captchaResponse;
+  }
+
+  handleLoad(): void {
+    console.log("Captcha Cargo Correctamente");
+  }
+
+  handleExpire(): void {
+    console.log("Captcha Expiro");
+    this.openSnackBar("Captcha Expirado");
+    this.captchaSuccess = false;
   }
 }

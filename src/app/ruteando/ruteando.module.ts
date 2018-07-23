@@ -16,7 +16,7 @@ import { HistorialDeJugadasComponent } from '../componentes/historial-de-jugadas
 import { PiedraPapelTijeraComponent } from '../componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatFormFieldModule} from '@angular/material';
+import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatSliderModule} from '@angular/material';
 import { TicTacToeComponent } from '../componentes/tic-tac-toe/tic-tac-toe.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AbmChoferesComponent } from '../componentes/abm-choferes/abm-choferes.component';
@@ -27,6 +27,8 @@ import { AgmCoreModule } from '@agm/core';
 import { VisorViajesComponent } from '../componentes/visor-viajes/visor-viajes.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AgmDirectionModule } from '../../../node_modules/agm-direction';
+import { NgxCaptchaModule } from '../../../node_modules/ngx-captcha';
+import { AbmEncuestaComponent } from '../componentes/abm-encuesta/abm-encuesta.component';
 // declaro donde quiero que se dirija
 const MiRuteo = [
 {path: '' , component: PrincipalComponent},
@@ -44,6 +46,7 @@ children:
       {path: 'abmChoferes' , component: AbmChoferesComponent},
       {path: 'abmVehiculos' , component: AbmVehiculosComponent},
       {path: 'abmViajes' , component: AbmViajesComponent},
+      {path: 'abmEncuesta' , component: AbmEncuestaComponent},
       {path: 'visorViajes' , component: VisorViajesComponent},
       {path: 'abmClientes' , component: AbmClientesComponent},
       {path: 'QuienSoy' , component: QuienSoyComponent}]
@@ -64,7 +67,9 @@ children:
     MatDialogModule,
     MatFormFieldModule,
     AgmCoreModule,
-    AgmDirectionModule
+    AgmDirectionModule,
+    NgxCaptchaModule,
+    MatSliderModule
   ],
   exports: [
     RouterModule

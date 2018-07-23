@@ -51,6 +51,7 @@ $app->group('/viaje', function () {
     $this->post('/asignarViaje', \ViajeApi::class . ':AsignarElChofer');
     $this->post('/finaliarViaje', \ViajeApi::class . ':FinalizarElViaje');
     $this->post('/cancelarViaje', \ViajeApi::class . ':CancelarElViaje');
+    $this->post('/realizarEncuesta', \ViajeApi::class . ':RealizarEncuesta');
     $this->get('/traerTodos', \ViajeApi::class . ':traerViajes');
     $this->post('/traerTodosPorEstado', \ViajeApi::class . ':traerViajesPorEstado');
     $this->post('/traerTodosPorChofer', \ViajeApi::class . ':traerViajesPorIdChofer');

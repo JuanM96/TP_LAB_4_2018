@@ -1,0 +1,41 @@
+.example-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  
+  .example-selected-value {
+    margin: 15px 0;
+  }
+
+  .example-form {
+    min-width: 300px;
+    max-width: 350px;
+    width: 100%;
+    background-color: #dddddd
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .separacion{
+    margin-bottom: 30px;
+  }
+  .example-margin {
+    margin: 10px;
+  }
+  
+  .mat-slider-horizontal {
+    width: 300px;
+  }
+  .seleccion{
+    text-align: center;
+    background-color: #c9c9c9
+  }
+  .boton{
+    margin-left: 35%;
+  }

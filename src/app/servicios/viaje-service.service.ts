@@ -62,6 +62,19 @@ export class ViajeServiceService {
       return error;
     })
   }
+
+  public realizarEncuesta(token:string,id2:number){
+    let obj:any = {
+      idViaje:id2
+    }
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/RealizarEncuesta",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
+    })
+  }
   public GuardarNuevo(token:string,viaje:any){
     return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/alta",viaje,token)
     .then(datos => {
@@ -84,6 +97,7 @@ export class ViajeServiceService {
       return error;
     })
   }
+  
   public Borrar(token:string,idViaje:number){
     let obj:any = {
       id:idViaje

@@ -37,7 +37,7 @@ import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormField, MatFormFieldModule} from '@angular/material';
+import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormField, MatFormFieldModule, MatSliderChange, MatSliderModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRadioModule} from '@angular/material/radio';
@@ -55,6 +55,8 @@ import { VehiculoServiceService } from './servicios/vehiculo-service.service';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { VisorViajesComponent } from './componentes/visor-viajes/visor-viajes.component';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { AbmEncuestaComponent } from './componentes/abm-encuesta/abm-encuesta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +77,8 @@ import { VisorViajesComponent } from './componentes/visor-viajes/visor-viajes.co
     AbmClientesComponent,
     AbmVehiculosComponent,
     AbmViajesComponent,
-    VisorViajesComponent
+    VisorViajesComponent,
+    AbmEncuestaComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +101,11 @@ import { VisorViajesComponent } from './componentes/visor-viajes/visor-viajes.co
       apiKey:"AIzaSyAKjO3Geo8sXZrg7CQNXPyTpj4_zA1qDzg",
       libraries: ["places"]
     }),
-    AgmDirectionModule
+    AgmDirectionModule,
+    NgxCaptchaModule.forRoot({
+      reCaptcha2SiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // optional, can be overridden with 'siteKey' component property
+    }),
+    MatSliderModule
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)

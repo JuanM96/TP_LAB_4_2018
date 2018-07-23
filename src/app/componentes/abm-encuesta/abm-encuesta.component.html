@@ -1,0 +1,36 @@
+<div class="container example-form example-full-width">
+  <h1>Encuesta de Satisfaccíon</h1>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Ingrese su nombre (opcional)">
+  </mat-form-field>
+  <div class="separacion">
+      <label>¿Como le parecio el estado del vehiculo?</label>
+      <mat-select placeholder="" class="seleccion">
+        <mat-option value="option">Limpio</mat-option>
+        <mat-option value="option">Regular</mat-option>
+        <mat-option value="option">Sucio</mat-option>
+      </mat-select>
+  </div>
+  <div class="separacion">
+    <mat-checkbox [(ngModel)]="premium">¿Utilizo el Servicio Premium?</mat-checkbox>
+    <label>¿Como Calificaria El Servicio?</label>
+    <mat-radio-group class="example-radio-group" [disabled] = "!premium">
+      <mat-radio-button class="example-radio-button" [value]="1">Bueno</mat-radio-button>
+      <mat-radio-button class="example-radio-button" [value]="1">Regular</mat-radio-button>
+      <mat-radio-button class="example-radio-button" [value]="1">Malo</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="separacion">
+    <label>¿Del 1 al 5 que tan satisfactorio fuel el viaje?</label>
+      <mat-slider
+        class="example-margin"
+        [max]="5"
+        [min]="1"
+        [thumbLabel]="true"
+        [(ngModel)]="viajeSatis">
+      </mat-slider>
+  </div>
+  <div class="separacion boton">
+    <button mat-raised-button color="primary" (click)="closeDialog()">Aceptar</button>
+  </div>
+</div>

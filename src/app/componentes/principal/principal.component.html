@@ -98,7 +98,13 @@
                             <input type="password" name="form-password" [(ngModel)]="usuarioLogIn.password" [ngModelOptions]="{standalone: true}" placeholder="Password..." class="form-password form-control" id="form-password">
                         </div>
                         <button mat-raised-button color="warn" (click)="LogIn()">Ingresar</button>
-                        <button mat-raised-button color="warn" (click)="LogInTest()">IngresarAdmin</button>
+                        <br>
+                        <div class="butons">
+                          <button mat-raised-button color="warn" (click)="LogInTest('admin')">IngresarAdmin</button>
+                          <button mat-raised-button color="warn" (click)="LogInTest('cliente')">IngresarCliente</button>
+                          <button mat-raised-button color="warn" (click)="LogInTest('chofer')">IngresarChofer</button>
+                        </div>
+                        
                         
                       </div>
                   </div>
@@ -140,8 +146,18 @@
                             <label class="sr-only" for="form-last-name">Password</label>
                             <input type="password" name="form-last-name" [(ngModel)]="usuarioSignUp.password" [ngModelOptions]="{standalone: true}" placeholder="Password..." class="form-last-name form-control" id="form-last-name">
                         </div>
-                        
-                            <button mat-raised-button color="warn"(click)="SignUp()">Registrarse</button>
+                        <div class="captcha">
+                          <ngx-recaptcha2
+                          [size]="size"
+                          [hl]="lang"
+                          [theme]="theme"
+                          [type]="type"
+                          (expire)="handleExpire()"
+                          (load)="handleLoad()"
+                          (success)="handleSuccess($event)">
+                          </ngx-recaptcha2>
+                        </div>
+                            <button mat-raised-button color="warn"(click)="SignUp()" [disabled]="!captchaSuccess">Registrarse</button>
                       </div>
                   </div>
                 </div>
