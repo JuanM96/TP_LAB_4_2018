@@ -9,18 +9,17 @@ class ViajeApi
 {
     public function AltaViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $viaje = new viaje($ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto']);
+        $viaje = new viaje($ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idVehiculo']);
         return $response->withJson($viaje->Guardar());
     }
-    /* public function ModificarVehiculo($request, $response, $args){
+    public function ModificarViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $vehiculoBuscado = $ArrayDeParametros['patenteBuscada'];
-        $vehiculo = new vehiculo($ArrayDeParametros['marca'],$ArrayDeParametros['color'],$ArrayDeParametros['patente'],$ArrayDeParametros['idChofer']);
-        return $response->withJson(vehiculo::Modificar($vehiculo,$vehiculoBuscado));
-    } */
+        $viaje = new viaje($ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idviaje'],$ArrayDeParametros['idChofer'],$ArrayDeParametros['estado'],$ArrayDeParametros['id']);
+        return $response->withJson(viaje::Modificar($viaje));
+    }
     public function BajaViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $viaje = $ArrayDeParametros['idViaje'];
+        $viaje = $ArrayDeParametros['id'];
         return $response->withJson(viaje::Baja($viaje));
     }
     public function traerViajes($request, $response, $args){
@@ -33,6 +32,14 @@ class ViajeApi
     public function traerViajesPorIdChofer($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(viaje::TraerViajesPorIdChofer($ArrayDeParametros['idChofer']));
+    }
+    public function traerViajesPorVehiculo($request, $response, $args){
+        $ArrayDeParametros = $request->getParsedBody();
+        return $response->withJson(viaje::TraerViajesPorVehiculo($ArrayDeParametros['idVehiculo']));
+    }
+    public function traerViajesPorId($request, $response, $args){
+        $ArrayDeParametros = $request->getParsedBody();
+        return $response->withJson(viaje::TraerViajesPorId($ArrayDeParametros['id']));
     }
     public function FinalizarElViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioServiceService } from '../../servicios/usuario-service.service';
+import { VehiculoServiceService } from '../../servicios/vehiculo-service.service';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import { Router } from '../../../../node_modules/@angular/router';
 @Component({
-  selector: 'app-abm-choferes',
-  templateUrl: './abm-choferes.component.html',
-  styleUrls: ['./abm-choferes.component.css']
+  selector: 'app-abm-vehiculos',
+  templateUrl: './abm-vehiculos.component.html',
+  styleUrls: ['./abm-vehiculos.component.css']
 })
-export class AbmChoferesComponent implements OnInit {
+export class AbmVehiculosComponent implements OnInit {
   listado:any;
   settings = {
     mode:'in-line',
@@ -18,45 +17,20 @@ export class AbmChoferesComponent implements OnInit {
         editable: false,
         addable: false
       },
-      nombre: {
-        title: 'Nombre'
+      marca: {
+        title: 'Marca'
       },
-      sexo: {
-        title: 'Sexo',
-        type: 'html',
-        editor: {
-          type: 'list',
-          config: {
-            list: [{ value: 'Masculino', title: 'Masculino' }, { value: 'Femenino', title: 'Femenino' }]
-          }
-        }
+      color: {
+        title: 'Color'
       },
-      usuario: {
-        title: 'Usuario'
-      },
-      password: {
-        title: 'Contraseña'
-      },
-      perfil: {
-        title: 'Perfil',
-        editable:false,
-        addable: false
+      patente: {
+        title: 'Patente'
       },
       habilitado: {
         title: 'Habilitado',
         editable: false,
         addable: false
       },
-      idVehiculo: {
-        title: 'Vehiculo',
-        editable: false,
-        addable: false
-      },
-      estado: {
-        title: 'Estado',
-        editable: false,
-        addable: false
-      }
     },
     actions:{
       columnTitle:"Acciones",
@@ -83,7 +57,7 @@ export class AbmChoferesComponent implements OnInit {
     }
 
   };
-  constructor(public usuariosServicio:UsuarioServiceService,public snackBar: MatSnackBar,public router:Router) {
+  constructor(public vehiculoService:VehiculoServiceService,public snackBar: MatSnackBar,public router:Router) {
     this.actualizarListado();
     /*if (ret["error"]) {
       alert(ret["errorMsg"]);
@@ -96,7 +70,7 @@ export class AbmChoferesComponent implements OnInit {
   ngOnInit() {
   }
   actualizarListado(){
-    this.usuariosServicio.traerListaPorPerfil(localStorage.getItem("token"),"chofer").then(datos => {
+    this.vehiculoService.traerListaCompleta(localStorage.getItem("token")).then(datos => {
       if (datos.statusText == "Network Authentication Required") {
         this.openSnackBar("ERROR,Acceso Restringido Vuelva a Logear");
         this.Salir();
@@ -119,7 +93,7 @@ export class AbmChoferesComponent implements OnInit {
   }
   onDeleteConfirm(event) {
     if (window.confirm('Estas Seguro que queres borrarlo?')) {
-      this.usuariosServicio.Borrar(localStorage.getItem("token"),event.data.usuario).then(datos => {
+      this.vehiculoService.Borrar(localStorage.getItem("token"),event.data.id).then(datos => {
         this.openSnackBar(datos.resultado);
         event.confirm.resolve();
         this.actualizarListado();
@@ -133,9 +107,8 @@ export class AbmChoferesComponent implements OnInit {
 
   onSaveConfirm(event) {
     if (window.confirm('Estas Seguro que queres editarlo?')) {
-      event.newData.estado = "En Casa";
       event.newData.habilitado = 1;
-      this.usuariosServicio.GuardarEditado(localStorage.getItem("token"),event.newData).then(datos => {
+      this.vehiculoService.GuardarEditado(localStorage.getItem("token"),event.newData).then(datos => {
         this.openSnackBar(datos.respuesta);
         event.confirm.resolve(event.newData);
         this.actualizarListado();
@@ -149,13 +122,9 @@ export class AbmChoferesComponent implements OnInit {
 
   onCreateConfirm(event) {
     if (window.confirm('Estas Seguro que queres agregarlo?')) {
-      event.newData.perfil = "chofer";
-      event.newData.id = 0;
       event.newData.habilitado = 1;
-      event.newData.idVehiculo = 0;
-      event.newData.estado = "En Casa";
       console.info(event.newData);
-      this.usuariosServicio.GuardarNuevo(localStorage.getItem("token"),event.newData).then(datos => {
+      this.vehiculoService.GuardarNuevo(localStorage.getItem("token"),event.newData).then(datos => {
         console.info(datos);
         this.openSnackBar(datos.respuesta);
         event.confirm.resolve(event.newData);
@@ -173,4 +142,5 @@ export class AbmChoferesComponent implements OnInit {
       duration: 500,
     });*/
   }
+
 }

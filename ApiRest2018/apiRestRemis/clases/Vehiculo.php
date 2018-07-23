@@ -5,15 +5,19 @@
         public $marca;
         public $color;
         public $patente;
-        public $idChofer;
+        public $habilitado;
+        //public $idChofer;
 
-        function __construct($marca = null,$color = null,$patente = null,$idChofer = null,$id = null)
+        function __construct($marca = null,$color = null,$patente = null/*,$idChofer = null*/,$habilitado = null,$id = null)
         {
-            if ($marca != null && $color != null &&  $patente != null && $idChofer != null) {
+            if ($marca != null && $color != null &&  $patente != null /*&& $idChofer != null*/) {
                 $this->marca = $marca;
                 $this->color = $color;
                 $this->patente = $patente;
-                $this->idChofer = $idChofer;
+                //$this->idChofer = $idChofer;
+            }
+            if($habilitado != null){
+                $this->habilitado = $habilitado;
             }
             if($id != null){
                 $this->id = $id;
@@ -24,11 +28,11 @@
             $existeVehiculo = $this->VerificarVehiculo();
             if ($existeVehiculo['resultado'] == false) {
                 $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-                $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO `vehiculo`(`marca`, `color`, `patente`, `idChofer`)VALUES (:marca,:color,:patente,:idChofer)");
+                $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO `vehiculo`(`marca`, `color`, `patente`, `habilitado`)VALUES (:marca,:color,:patente,:habilitado)");
                 $consulta->bindValue(':marca', $this->marca, PDO::PARAM_STR);
                 $consulta->bindValue(':color', $this->color, PDO::PARAM_STR);
                 $consulta->bindValue(':patente', $this->patente, PDO::PARAM_STR);
-                $consulta->bindValue(':idChofer', $this->idChofer, PDO::PARAM_STR);
+                $consulta->bindValue(':habilitado', $this->habilitado, PDO::PARAM_STR);
                 $itsOk = $consulta->execute();
             }
             if ($itsOk) {
@@ -40,17 +44,17 @@
             return $ret;
             
         }
-        public static function Modificar($nuevoVehiculo,$patente){
+        public static function Modificar($nuevoVehiculo){
             $itsOk = false;
-            $vehiculo = vehiculo::TraerVehiculoPorPatente($patente);
+            $vehiculo = vehiculo::TraerVehiculoPorId($nuevoVehiculo->id);
             if ($vehiculo != false) {
                 $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-                $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `vehiculo` SET `marca`=:marca,`color`=:color,`patente`=:patente,`idChofer`=:idChofer WHERE patente = :patenteBuscado");
+                $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `vehiculo` SET `marca`=:marca,`color`=:color,`patente`=:patente,`habilitado`=:habilitado WHERE id = :id");
                 $consulta->bindValue(':marca', $nuevoVehiculo->marca, PDO::PARAM_STR);
                 $consulta->bindValue(':color', $nuevoVehiculo->color, PDO::PARAM_STR);
                 $consulta->bindValue(':patente', $nuevoVehiculo->patente, PDO::PARAM_STR);
-                $consulta->bindValue(':patenteBuscado', $patente, PDO::PARAM_STR);
-                $consulta->bindValue(':idChofer', $nuevoVehiculo->idChofer, PDO::PARAM_STR);
+                $consulta->bindValue(':id', $nuevoVehiculo->id, PDO::PARAM_STR);
+                $consulta->bindValue(':habilitado', $nuevoVehiculo->habilitado, PDO::PARAM_STR);
                 $itsOk = $consulta->execute();
             }
             if ($itsOk) {
@@ -77,14 +81,20 @@
             $UsuarioBuscado= $consulta->fetch();
             return $UsuarioBuscado;
         }
-        public static function TraerVehiculoPorIdChofer($idChofer){
+        public static function TraerVehiculoPorId($id){
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM vehiculo WHERE idChofer = :idChofer");
-            $consulta->bindValue(':idChofer', $idChofer, PDO::PARAM_STR);
+            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM vehiculo WHERE id = :id");
+            $consulta->bindValue(':id', $id, PDO::PARAM_STR);
             $consulta->execute();
             $consulta->setFetchMode(PDO::FETCH_CLASS, 'vehiculo');
             $UsuarioBuscado= $consulta->fetch();
             return $UsuarioBuscado;
+        }
+        public static function TraerVehiculosDisponibles($id){
+            $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM `vehiculo` WHERE id NOT IN (SELECT `idVehiculo` FROM viaje WHERE estado = 'En Viaje')");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_CLASS, 'vehiculo');
         }
         public function VerificarVehiculo(){
             $objetoAccesoDatos = AccesoDatos::DameUnObjetoAcceso();
@@ -99,7 +109,7 @@
             }
             return $ret;
         }
-        public static function Baja($patente){
+        /*public static function Baja($patente){
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM `vehiculo` WHERE patente = :patente");
             $consulta->bindValue(':patente', $patente, PDO::PARAM_BOOL);
@@ -109,6 +119,22 @@
             }
             else{
                 $ret['resultado'] = "Borrado con exito!";
+            }
+            return $ret;
+        }*/
+        public static function Baja($id){
+            $ret;
+            $habilitar = 0;
+            $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `vehiculo` SET habilitado = :habilitado WHERE id = :id");
+            $consulta->bindValue(':habilitado', $habilitar, PDO::PARAM_INT);
+            $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+            $ret['consulta'] = $consulta->execute();
+            if ($ret['consulta']) {
+                $ret['resultado'] = "Deshabilitado";
+            }
+            else{
+                $ret['resultado'] = "Vehiculo Inexistente";
             }
             return $ret;
         }

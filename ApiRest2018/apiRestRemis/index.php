@@ -41,17 +41,21 @@ $app->group('/vehiculo', function () {
     $this->post('/modificacion', \VehiculoApi::class . ':ModificarVehiculo');
     $this->get('/traerTodos', \VehiculoApi::class . ':traerVehiculos');
     $this->post('/traerUnoPatente', \VehiculoApi::class . ':traerVehiculoPorPatente');
-    $this->post('/traerUnoIdChofer', \VehiculoApi::class . ':traerVehiculoPorIdChofer');
+    $this->post('/traerUnoId', \VehiculoApi::class . ':traerVehiculoPorId');
+    $this->get('/traerDisponibles', \VehiculoApi::class . ':traerVehiculosDisponibles');
 }) ->add(\verificarJWT::class . ':VerificarToken') ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 $app->group('/viaje', function () {
     $this->post('/alta', \ViajeApi::class . ':AltaViaje');
     $this->post('/baja', \ViajeApi::class . ':BajaViaje');
+    $this->post('/modificacion', \ViajeApi::class . ':ModificarViaje');
     $this->post('/asignarViaje', \ViajeApi::class . ':AsignarElChofer');
     $this->post('/finaliarViaje', \ViajeApi::class . ':FinalizarElViaje');
     $this->post('/cancelarViaje', \ViajeApi::class . ':CancelarElViaje');
     $this->get('/traerTodos', \ViajeApi::class . ':traerViajes');
     $this->post('/traerTodosPorEstado', \ViajeApi::class . ':traerViajesPorEstado');
     $this->post('/traerTodosPorChofer', \ViajeApi::class . ':traerViajesPorIdChofer');
+    $this->post('/traerTodosPorVehiculo', \ViajeApi::class . ':traerViajesPorVehiculo');
+    $this->post('/traerPorId', \ViajeApi::class . ':traerViajesPorId');
 }) ->add(\verificarJWT::class . ':VerificarToken') ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/ingreso', function () {

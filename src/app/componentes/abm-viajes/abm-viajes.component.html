@@ -1,0 +1,24 @@
+<form class="example-form">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        <!-- <agm-direction *ngIf="dir" 
+          [origin]="dir.origin" [destination]="dir.destination">
+        </agm-direction> -->
+      </agm-map>
+      <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search>
+      <!-- <input matInput placeholder="Origen" [(ngModel)]="origenIngresado" [ngModelOptions]="{standalone: true}" > -->
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Destino" [(ngModel)]="destinoIngresado" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-checkbox class="example-margin" [(ngModel)]="premium" [ngModelOptions]="{standalone: true}">¿Premium?</mat-checkbox>
+    <mat-form-field class="example-full-width">
+        <mat-select placeholder="Vehiculos" [(ngModel)]="viaje.idVehiculo" [disabled]="!premium" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let vehiculo of listado" [value]="vehiculo.id">
+            {{vehiculo.marca}} {{vehiculo.color}} {{vehiculo.patente}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>

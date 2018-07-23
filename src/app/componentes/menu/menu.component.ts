@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AbmViajesComponent } from '../abm-viajes/abm-viajes.component';
+import { MatDialog } from '../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +9,32 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
+  viaje = {
+    origenLat: 0,
+    origenLong: 0,
+    destinoLat: 0,
+    destinoLong: 0,
+    cliente: "",
+    fecha: 0,
+    monto: 0,
+    idChofer: 0,
+    idVehiculo: 0,
+    estado: ""
+  }
+  viajeAGuardar = {
+    origenLat: 0,
+    origenLong: 0,
+    destinoLat: 0,
+    destinoLong: 0,
+    cliente: "",
+    fecha: 0,
+    monto: 0,
+    idChofer: 0,
+    idVehiculo: 0,
+    estado: ""
+  }
   constructor(private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -41,6 +66,19 @@ export class MenuComponent implements OnInit {
           this.router.navigate(['/Remiseria/QuienSoy']);
       break;
     }
+    
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AbmViajesComponent, {
+      width: '400px',
+      data: this.viaje
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.info(this.viajeAGuardar);
+      this.viajeAGuardar = result;
+    });
   }
   Salir(){
     localStorage.setItem('token',"");

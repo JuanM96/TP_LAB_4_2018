@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AdivinaElNumeroComponent } from './componentes/adivina-el-numero/adivina-el-numero.component';
@@ -37,7 +37,7 @@ import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormField, MatFormFieldModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRadioModule} from '@angular/material/radio';
@@ -47,7 +47,14 @@ import { HistorialDeJugadasComponent } from './componentes/historial-de-jugadas/
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AbmChoferesComponent } from './componentes/abm-choferes/abm-choferes.component';
 import { UsuarioServiceService } from './servicios/usuario-service.service';
-
+import { AbmClientesComponent } from './componentes/abm-clientes/abm-clientes.component';
+import { AbmVehiculosComponent } from './componentes/abm-vehiculos/abm-vehiculos.component';
+import { AbmViajesComponent } from './componentes/abm-viajes/abm-viajes.component';
+import { ViajeServiceService } from './servicios/viaje-service.service';
+import { VehiculoServiceService } from './servicios/vehiculo-service.service';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { VisorViajesComponent } from './componentes/visor-viajes/visor-viajes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +71,11 @@ import { UsuarioServiceService } from './servicios/usuario-service.service';
     PiedraPapelTijeraComponent,
     TicTacToeComponent,
     HistorialDeJugadasComponent,
-    AbmChoferesComponent
+    AbmChoferesComponent,
+    AbmClientesComponent,
+    AbmVehiculosComponent,
+    AbmViajesComponent,
+    VisorViajesComponent
   ],
   imports: [
     BrowserModule,
@@ -80,12 +91,20 @@ import { UsuarioServiceService } from './servicios/usuario-service.service';
     MatSidenavModule,
     Ng2SmartTableModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    AgmCoreModule.forRoot({
+      apiKey:"AIzaSyAKjO3Geo8sXZrg7CQNXPyTpj4_zA1qDzg",
+      libraries: ["places"]
+    }),
+    AgmDirectionModule
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [JuegoServiceService,MiHttpService,UsuarioServiceService],
-  bootstrap: [AppComponent]
+  providers: [JuegoServiceService,MiHttpService,UsuarioServiceService,ViajeServiceService,VehiculoServiceService],
+  bootstrap: [AppComponent],
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

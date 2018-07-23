@@ -1,8 +1,6 @@
 <div class="container">
-  <h1 class="caja">Listado De Todos Los Choferes</h1>
+  <h1 class="caja">Listado De Todos Los Clientes</h1>
   <div class="tabla">
     <ng2-smart-table [settings]="settings" [source]="listado" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table> 
   </div>
 </div>
-
-<!-- (create)="OnCreate($event)" (edit)="OnEdit($event)" (delete)="OnDelete($event)" -->

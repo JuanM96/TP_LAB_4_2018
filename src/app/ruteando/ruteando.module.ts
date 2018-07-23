@@ -16,11 +16,17 @@ import { HistorialDeJugadasComponent } from '../componentes/historial-de-jugadas
 import { PiedraPapelTijeraComponent } from '../componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatFormFieldModule} from '@angular/material';
 import { TicTacToeComponent } from '../componentes/tic-tac-toe/tic-tac-toe.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AbmChoferesComponent } from '../componentes/abm-choferes/abm-choferes.component';
-
+import { AbmVehiculosComponent } from '../componentes/abm-vehiculos/abm-vehiculos.component';
+import { AbmViajesComponent } from '../componentes/abm-viajes/abm-viajes.component';
+import { AbmClientesComponent } from '../componentes/abm-clientes/abm-clientes.component';
+import { AgmCoreModule } from '@agm/core';
+import { VisorViajesComponent } from '../componentes/visor-viajes/visor-viajes.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AgmDirectionModule } from '../../../node_modules/agm-direction';
 // declaro donde quiero que se dirija
 const MiRuteo = [
 {path: '' , component: PrincipalComponent},
@@ -36,6 +42,10 @@ children:
       {path: 'TicTacToe' , component: TicTacToeComponent},
       {path: 'Historial' , component: HistorialDeJugadasComponent},
       {path: 'abmChoferes' , component: AbmChoferesComponent},
+      {path: 'abmVehiculos' , component: AbmVehiculosComponent},
+      {path: 'abmViajes' , component: AbmViajesComponent},
+      {path: 'visorViajes' , component: VisorViajesComponent},
+      {path: 'abmClientes' , component: AbmClientesComponent},
       {path: 'QuienSoy' , component: QuienSoyComponent}]
 },
 {path: '**' , component: JuegosComponent},
@@ -50,7 +60,11 @@ children:
     MatInputModule,
     MatSelectModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    AgmCoreModule,
+    AgmDirectionModule
   ],
   exports: [
     RouterModule

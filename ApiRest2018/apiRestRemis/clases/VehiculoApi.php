@@ -9,30 +9,32 @@ class VehiculoApi
 {
     public function AltaVehiculo($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $vehiculo = new vehiculo($ArrayDeParametros['marca'],$ArrayDeParametros['color'],$ArrayDeParametros['patente'],$ArrayDeParametros['idChofer']);
+        $vehiculo = new vehiculo($ArrayDeParametros['marca'],$ArrayDeParametros['color'],$ArrayDeParametros['patente'],$ArrayDeParametros['habilitado']);
         return $response->withJson($vehiculo->Guardar());
     }
     public function ModificarVehiculo($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $vehiculoBuscado = $ArrayDeParametros['patenteBuscada'];
-        $vehiculo = new vehiculo($ArrayDeParametros['marca'],$ArrayDeParametros['color'],$ArrayDeParametros['patente'],$ArrayDeParametros['idChofer']);
-        return $response->withJson(vehiculo::Modificar($vehiculo,$vehiculoBuscado));
+        $vehiculo = new vehiculo($ArrayDeParametros['marca'],$ArrayDeParametros['color'],$ArrayDeParametros['patente'],$ArrayDeParametros['habilitado'],$ArrayDeParametros['id']);
+        return $response->withJson(vehiculo::Modificar($vehiculo));
     }
     public function BajaVehiculo($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $vehiculo = $ArrayDeParametros['patente'];
+        $vehiculo = $ArrayDeParametros['id'];
         return $response->withJson(vehiculo::Baja($vehiculo));
     }
     public function traerVehiculos($request, $response, $args){
         return $response->withJson(vehiculo::TraerTodosVehiculos());
     }
+    public function traerVehiculosDisponibles($request, $response, $args){
+        return $response->withJson(vehiculo::TraerVehiculosDisponibles());
+    }
     public function traerVehiculoPorPatente($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(vehiculo::TraerVehiculoPorPatente($ArrayDeParametros['patente']));
     }
-    public function traerVehiculoPorIdChofer($request, $response, $args){
+    public function traerVehiculoPorId($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        return $response->withJson(vehiculo::TraerVehiculoPorIdChofer($ArrayDeParametros['idChofer']));
+        return $response->withJson(vehiculo::TraerVehiculoPorId($ArrayDeParametros['id']));
     }
 }
 ?>

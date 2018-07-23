@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card">
+      <div class="map">
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+      <table class="table mesa">
+        <tr>
+          <td class="titulos">Cliente:</td>
+          <td class="datos">Cliente:</td>
+        </tr>
+        <tr>
+          <td class="titulos">Destino:</td>
+          <td class="datos">Destino:</td>
+        </tr>
+        <tr>
+          <td class="titulos">Origen:</td>
+          <td class="datos">Origen:</td>
+        </tr>
+        <tr>
+          <td class="titulos">Fecha:</td>
+          <td class="datos">Fecha:</td>
+        </tr>
+        <tr>
+          <td class="titulos">Monto Aprox:</td>
+          <td class="datos">Monto Aprox:</td>
+        </tr>
+        <tr>
+          <td class="titulos">Chofer:</td>
+          <td class="datos">Chofer:</td>
+        </tr>
+        <tr>
+          <td class="titulos">Vehiculo:</td>
+          <td class="datos">Vehiculo:</td>
+        </tr>
+  
+        <tr>
+          <td class="titulos">Estado:</td>
+          <td class="datos">Estado:</td>
+        </tr>
+      </table>
+      <p>
+        <button mat-raised-button color="warn"  (click)="Juego('Adivina')">Asignar Chofer</button>
+        <button mat-raised-button color="warn"  (click)="Juego('Adivina')">Asignar Vehiculo</button>
+      </p>
+        <button mat-raised-button color="warn"  (click)="Juego('Adivina')">Cancelar Viaje</button>
+      
+    </div>
+    
+  </div>
