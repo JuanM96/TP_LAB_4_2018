@@ -9,25 +9,26 @@ class ViajeApi
 {
     public function AltaViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $viaje = new viaje($ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idVehiculo']);
+        $viaje = new viaje($ArrayDeParametros['origenDir'],$ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoDir'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idCliente'],$ArrayDeParametros['idVehiculo']);
         return $response->withJson($viaje->Guardar());
     }
     public function ModificarViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $viaje = new viaje($ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idviaje'],$ArrayDeParametros['idChofer'],$ArrayDeParametros['estado'],$ArrayDeParametros['id']);
+        $viaje = new viaje($ArrayDeParametros['origenDir'],$ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoDir'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idCliente'],$ArrayDeParametros['idVehiculo'],$ArrayDeParametros['idChofer'],$ArrayDeParametros['estado'],$ArrayDeParametros['encuesta'],$ArrayDeParametros['id']);
         return $response->withJson(viaje::Modificar($viaje));
+		//return $response->withJson($ArrayDeParametros['idChofer']);
     }
     public function BajaViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         $viaje = $ArrayDeParametros['id'];
-        return $response->withJson(viaje::Baja($viaje));
+        return $response->withJson(viaje::CancelarViaje($viaje));
     }
     public function traerViajes($request, $response, $args){
         return $response->withJson(viaje::TraerTodosViajes());
     }
     public function traerViajesPorEstado($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        return $response->withJson(viaje::TraerViajesPorEstado($ArrayDeParametros['estado'])); // "En Viaje", "Pendiente", "Cancelado"
+        return $response->withJson(viaje::TraerViajesPorEstado($ArrayDeParametros['estado'])); // "En Viaje", "Pendiente", "Cancelado", "Finalizado"
     }
     public function traerViajesPorIdChofer($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
@@ -36,6 +37,10 @@ class ViajeApi
     public function traerViajesPorVehiculo($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(viaje::TraerViajesPorVehiculo($ArrayDeParametros['idVehiculo']));
+    }
+    public function traerViajesPorCliente($request, $response, $args){
+        $ArrayDeParametros = $request->getParsedBody();
+        return $response->withJson(viaje::TraerViajesPorCliente($ArrayDeParametros['idCliente']));
     }
     public function traerViajesPorId($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
@@ -52,6 +57,10 @@ class ViajeApi
     public function AsignarElChofer($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         return $response->withJson(viaje::AsignarChofer($ArrayDeParametros['idViaje'],$ArrayDeParametros['idChofer']));
+    }
+    public function AsignarElVehiculo($request, $response, $args){
+        $ArrayDeParametros = $request->getParsedBody();
+        return $response->withJson(viaje::AsignarVehiculo($ArrayDeParametros['idViaje'],$ArrayDeParametros['idVehiculo']));
     }
     public function CancelarElViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();

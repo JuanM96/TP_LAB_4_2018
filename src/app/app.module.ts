@@ -57,6 +57,10 @@ import { AgmDirectionModule } from 'agm-direction';
 import { VisorViajesComponent } from './componentes/visor-viajes/visor-viajes.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { AbmEncuestaComponent } from './componentes/abm-encuesta/abm-encuesta.component';
+import { AsignarModalComponent } from './componentes/asignar-modal/asignar-modal.component';
+import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
+import { ChartsModule } from 'ng2-charts';
+import { EncuestaServiceService } from './servicios/encuesta-service.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +82,9 @@ import { AbmEncuestaComponent } from './componentes/abm-encuesta/abm-encuesta.co
     AbmVehiculosComponent,
     AbmViajesComponent,
     VisorViajesComponent,
-    AbmEncuestaComponent
+    AbmEncuestaComponent,
+    AsignarModalComponent,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
@@ -105,12 +111,13 @@ import { AbmEncuestaComponent } from './componentes/abm-encuesta/abm-encuesta.co
     NgxCaptchaModule.forRoot({
       reCaptcha2SiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // optional, can be overridden with 'siteKey' component property
     }),
-    MatSliderModule
+    MatSliderModule,
+    ChartsModule
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [JuegoServiceService,MiHttpService,UsuarioServiceService,ViajeServiceService,VehiculoServiceService],
+  providers: [JuegoServiceService,MiHttpService,UsuarioServiceService,ViajeServiceService,VehiculoServiceService,EncuestaServiceService],
   bootstrap: [AppComponent],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
 })

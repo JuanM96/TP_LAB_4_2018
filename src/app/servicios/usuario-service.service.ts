@@ -5,22 +5,21 @@ export class UsuarioServiceService {
 
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
-    this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerTodos",token)
+    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerTodos",token)
     .then(datos => {
-      console.info(datos)
-      let ret = {
-        listado:datos,
-        error:false
-      }
-      return ret;
+      return datos;
     })
     .catch(error =>{
-      let ret = {
-        listado:false,
-        error:true,
-        errorMsg:error
-      }
-      return ret;
+      return error;
+    })
+  }
+  public traerDisponibles(token:string){
+    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerTodosChoferesDisponibles",token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
     })
   }
   public traerListaPorPerfil(token:string,perfil2:string){
@@ -35,6 +34,43 @@ export class UsuarioServiceService {
       return error;
     })
   }
+  public traerPorId(token:string,id2:number){
+    let obj:any = {
+      id:id2
+    }
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerUno",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
+    })
+  }
+  public ponerATrabajar(token:string,id2:number){
+    let obj:any = {
+      id:id2
+    }
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/empezarATrabajar",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
+    })
+  }
+  public dejarDeTrabajar(token:string,id2:number){
+    let obj:any = {
+      id:id2
+    }
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/dejarDeTrabajar",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
+    })
+  }
+  
   public GuardarNuevo(token:string,usuario:any){
     return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/alta",usuario,token)
     .then(datos => {

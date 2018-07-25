@@ -50,6 +50,18 @@ export class ViajeServiceService {
       return error;
     })
   }
+  public traerTodosPorCliente(token:string,idCliente2:number){
+    let obj:any = {
+      idCliente:idCliente2
+    }
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorCliente",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
+    })
+  }
   public traerPorId(token:string,id2:number){
     let obj:any = {
       id:id2
@@ -67,7 +79,33 @@ export class ViajeServiceService {
     let obj:any = {
       idViaje:id2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/RealizarEncuesta",obj,token)
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/realizarEncuesta",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
+    })
+  }
+  public asignarChofer(token:string,idViajeA:number,idChoferA:number){
+    let obj:any = {
+      idViaje:idViajeA,
+      idChofer:idChoferA
+    }
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/asignarChofer",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      return error;
+    })
+  }
+  public asignarVehiculo(token:string,idViajeA:number,idVehiculoA:number){
+    let obj:any = {
+      idViaje:idViajeA,
+      idVehiculo:idVehiculoA
+    }
+    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/asignarVehiculo",obj,token)
     .then(datos => {
       return datos;
     })
@@ -98,7 +136,7 @@ export class ViajeServiceService {
     })
   }
   
-  public Borrar(token:string,idViaje:number){
+  public CancelarViaje(token:string,idViaje:number){
     let obj:any = {
       id:idViaje
     }

@@ -99,6 +99,40 @@
             return $ret;
             
         }
+        public static function EmpezarATrabajar($idChofer){
+            $itsOk = false;
+            $estado = "Trabajando";
+            $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `usuario` SET `estado`=:estado WHERE id = :id");
+            $consulta->bindValue(':id', $idChofer, PDO::PARAM_STR);
+            $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
+            $itsOk = $consulta->execute();
+            if ($itsOk) {
+                $ret['respuesta'] = "El Chofer Se Modifico Exitosamente";
+            }
+            else {
+                $ret['respuesta'] = "ERROR";
+            }
+            return $ret;
+            
+        }
+        public static function DejarDeTrabajar($idChofer){
+            $itsOk = false;
+            $estado = "En Casa";
+            $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `usuario` SET `estado`=:estado WHERE id = :id");
+            $consulta->bindValue(':id', $idChofer, PDO::PARAM_STR);
+            $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
+            $itsOk = $consulta->execute();
+            if ($itsOk) {
+                $ret['respuesta'] = "El Chofer Se Modifico Exitosamente";
+            }
+            else {
+                $ret['respuesta'] = "ERROR";
+            }
+            return $ret;
+            
+        }
         public static function TraerTodosUsuarios(){
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE 1");
@@ -120,6 +154,12 @@
             $consulta->bindValue(':perfil', $perfil, PDO::PARAM_STR);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_CLASS, 'usuario');
+        }
+        public static function TraerChoferesDisponibles(){
+            $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM `usuario` WHERE perfil = 'chofer' AND estado = 'Trabajando' AND id NOT IN (SELECT `idChofer` FROM viaje WHERE estado = 'En Viaje')");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_CLASS, 'vehiculo');
         }
         public function VerificarUsuario(){
             $objetoAccesoDatos = AccesoDatos::DameUnObjetoAcceso();

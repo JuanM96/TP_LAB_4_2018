@@ -10,6 +10,7 @@ require_once '/clases/VerificarJWT.php';
 require_once '/clases/UsuarioApi.php';
 require_once '/clases/VehiculoApi.php';
 require_once '/clases/ViajeApi.php';
+require_once '/clases/EncuestaApi.php';
 require_once '/clases/MWparaCORS.php';
 
 $config['displayErrorDetails'] = true;
@@ -31,7 +32,10 @@ $app->group('/usuario', function () {
     $this->post('/alta', \UsuarioApi::class . ':AltaUsuario');
     $this->post('/baja', \UsuarioApi::class . ':BajaUsuario');
     $this->post('/modificacion', \UsuarioApi::class . ':ModificarUsuario');
+    $this->post('/empezarATrabajar', \UsuarioApi::class . ':empezarATrabajar');
+    $this->post('/dejarDeTrabajar', \UsuarioApi::class . ':dejarDeTrabajar');
     $this->get('/traerTodos', \UsuarioApi::class . ':traerUsuarios');
+    $this->get('/traerTodosChoferesDisponibles', \UsuarioApi::class . ':traerChoferesDisponibles');
     $this->post('/traerTodosPorPerfil', \UsuarioApi::class . ':traerUsuarioPorPerfil');
     $this->post('/traerUno', \UsuarioApi::class . ':traerUsuarioPorUsuario');
 }) ->add(\verificarJWT::class . ':VerificarToken') ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
@@ -48,7 +52,8 @@ $app->group('/viaje', function () {
     $this->post('/alta', \ViajeApi::class . ':AltaViaje');
     $this->post('/baja', \ViajeApi::class . ':BajaViaje');
     $this->post('/modificacion', \ViajeApi::class . ':ModificarViaje');
-    $this->post('/asignarViaje', \ViajeApi::class . ':AsignarElChofer');
+    $this->post('/asignarChofer', \ViajeApi::class . ':AsignarElChofer');
+    $this->post('/asignarVehiculo', \ViajeApi::class . ':AsignarElVehiculo');
     $this->post('/finaliarViaje', \ViajeApi::class . ':FinalizarElViaje');
     $this->post('/cancelarViaje', \ViajeApi::class . ':CancelarElViaje');
     $this->post('/realizarEncuesta', \ViajeApi::class . ':RealizarEncuesta');
@@ -56,9 +61,13 @@ $app->group('/viaje', function () {
     $this->post('/traerTodosPorEstado', \ViajeApi::class . ':traerViajesPorEstado');
     $this->post('/traerTodosPorChofer', \ViajeApi::class . ':traerViajesPorIdChofer');
     $this->post('/traerTodosPorVehiculo', \ViajeApi::class . ':traerViajesPorVehiculo');
+    $this->post('/traerTodosPorCliente', \ViajeApi::class . ':traerViajesPorCliente');
     $this->post('/traerPorId', \ViajeApi::class . ':traerViajesPorId');
 }) ->add(\verificarJWT::class . ':VerificarToken') ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-
+$app->group('/encuesta', function () {
+    $this->post('/alta', \EncuestaApi::class . ':altaEncuesta');
+    $this->get('/traerTodos', \EncuestaApi::class . ':traerEncuesta');
+}) ->add(\verificarJWT::class . ':VerificarToken') ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 $app->group('/ingreso', function () {
     $this->post('/logIn', \UsuarioApi::class . ':LogIn');
     $this->post('/registro', \UsuarioApi::class . ':AltaUsuario');

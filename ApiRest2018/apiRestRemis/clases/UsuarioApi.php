@@ -22,6 +22,16 @@ class UsuarioApi
         $usuario = $ArrayDeParametros['usuario'];
         return $response->withJson(usuario::Deshabilitar($usuario));
     }
+    public function empezarATrabajar($request, $response, $args){
+        $ArrayDeParametros = $request->getParsedBody();
+        $id = $ArrayDeParametros['id'];
+        return $response->withJson(usuario::EmpezarATrabajar($id));
+    }
+    public function dejarDeTrabajar($request, $response, $args){
+        $ArrayDeParametros = $request->getParsedBody();
+        $id = $ArrayDeParametros['id'];
+        return $response->withJson(usuario::DejarDeTrabajar($id));
+    }
     /*public function ActualizarEstadoUsuario($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
         $usuario = intval($ArrayDeParametros['usuario']);
@@ -49,6 +59,9 @@ class UsuarioApi
     }
     public function traerUsuarios($request, $response, $args){
         return $response->withJson(usuario::TraerTodosUsuarios());
+    }
+    public function traerChoferesDisponibles($request, $response, $args){
+        return $response->withJson(usuario::TraerChoferesDisponibles());
     }
     public function traerUsuarioPorUsuario($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();

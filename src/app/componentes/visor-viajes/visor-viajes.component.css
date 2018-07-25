@@ -33,6 +33,13 @@ agm-map {
     width: 350px;
     height: 350px;
 }
-.map{
-
+.filtro{
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffffad;
+    border-radius: 15px;
+    color: black;
+    width: 50%;
+    margin: 0 auto;
 }

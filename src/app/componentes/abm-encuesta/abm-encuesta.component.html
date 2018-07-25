@@ -1,23 +1,23 @@
 <div class="container example-form example-full-width">
   <h1>Encuesta de Satisfaccíon</h1>
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Ingrese su nombre (opcional)">
+  <mat-form-field class="example-full-width" >
+    <input matInput placeholder="Ingrese su nombre (opcional)" [(ngModel)]="encuesta.nombre">
   </mat-form-field>
   <div class="separacion">
       <label>¿Como le parecio el estado del vehiculo?</label>
-      <mat-select placeholder="" class="seleccion">
-        <mat-option value="option">Limpio</mat-option>
-        <mat-option value="option">Regular</mat-option>
-        <mat-option value="option">Sucio</mat-option>
+      <mat-select placeholder="" class="seleccion" [(ngModel)]="encuesta.respuesta1">
+        <mat-option value="Limpio">Limpio</mat-option>
+        <mat-option value="Regular">Regular</mat-option>
+        <mat-option value="Sucio">Sucio</mat-option>
       </mat-select>
   </div>
   <div class="separacion">
     <mat-checkbox [(ngModel)]="premium">¿Utilizo el Servicio Premium?</mat-checkbox>
-    <label>¿Como Calificaria El Servicio?</label>
-    <mat-radio-group class="example-radio-group" [disabled] = "!premium">
-      <mat-radio-button class="example-radio-button" [value]="1">Bueno</mat-radio-button>
-      <mat-radio-button class="example-radio-button" [value]="1">Regular</mat-radio-button>
-      <mat-radio-button class="example-radio-button" [value]="1">Malo</mat-radio-button>
+    <label>¿Como Calificaria El Servicio? {{encuesta.respuesta2}}</label>
+    <mat-radio-group class="example-radio-group" [disabled] = "!premium" [(ngModel)]="encuesta.respuesta2">
+      <mat-radio-button class="example-radio-button" value="Bueno">Bueno</mat-radio-button>
+      <mat-radio-button class="example-radio-button" value="Regular">Regular</mat-radio-button>
+      <mat-radio-button class="example-radio-button" value="Malo">Malo</mat-radio-button>
     </mat-radio-group>
   </div>
   <div class="separacion">
@@ -27,7 +27,7 @@
         [max]="5"
         [min]="1"
         [thumbLabel]="true"
-        [(ngModel)]="viajeSatis">
+        [(ngModel)]="encuesta.respuesta3">
       </mat-slider>
   </div>
   <div class="separacion boton">

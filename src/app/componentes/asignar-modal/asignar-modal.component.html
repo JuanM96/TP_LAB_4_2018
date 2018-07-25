@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Asignar {{asignar}} Disponible</h1>
+<div class="contenedor">
+  <div mat-dialog-content>
+    <p>Seleccione un {{asignar}} Diponible</p>
+    <mat-form-field>
+      <mat-select placeholder="Seleccionar" [(value)]="selectedId">
+        <mat-option *ngFor="let element of listado" [value]="element.id">
+          <div *ngIf="asignar == 'Chofer'">
+            {{element.nombre}}
+          </div>
+          <div *ngIf="asignar == 'Vehiculo'">
+            {{element.marca}} {{element.color}} {{element.patente}}
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="botones">
+    <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button (click)="asignarAccion()" cdkFocusInitial>Aceptar</button>
+  </div>
+</div>

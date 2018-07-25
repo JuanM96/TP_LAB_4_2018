@@ -2,28 +2,64 @@
     class viaje
     {
         public $id;
+        public $origenDir;
         public $origenLat;
         public $origenLong;
+        public $destinoDir;
         public $destinoLat;
         public $destinoLong;
         public $fecha;
         public $monto;
+        public $idCliente;
         public $idChofer;
         public $idVehiculo;
         public $estado;
         public $encuesta;
 
-        function __construct($origenLat = null,$origenLong = null,$destinoLat = null,$destinoLong = null,$fecha = null,$monto = null,$idVehiculo = null,$idChofer = null,$estado = null,$encuesta = null,$id = null)
+        function __construct($origenDir = null,$origenLat = null,$origenLong = null,$destinoDir = null,$destinoLat = null,$destinoLong = null,$fecha = null,$monto = null,$idCliente = null,$idVehiculo = null,$idChofer = null,$estado = null,$encuesta = null,$id = null)
         {
-            if ($origenLat != null && $origenLong != null && $destinoLat != null && $destinoLong != null &&  $fecha != null && $monto != null && $idVehiculo != null) {
+            /*if ($origenDir != null && $origenLat != null && $origenLong != null && $destinoDir != null && $destinoLat != null && $destinoLong != null &&  $fecha != null && $monto != null && $idVehiculo != null && $idCliente != null) {
+                $this->origenDir = $origenDir;
                 $this->origenLat = $origenLat;
                 $this->origenLong = $origenLong;
+                $this->destinoDir = $destinoDir;
                 $this->destinoLat = $destinoLat;
                 $this->destinoLong = $destinoLong;
                 $this->fecha = $fecha;
                 $this->monto = $monto;
                 $this->idVehiculo = $idVehiculo;
+                $this->idCliente = $idCliente;
                 //$this->estado = $estado;
+            }*/
+			if ($origenDir != null) {
+                $this->origenDir = $origenDir;
+            }
+			if ($origenLat != null) {
+                $this->origenLat = $origenLat;
+            }
+			if ($origenLong != null) {
+                $this->origenLong = $origenLong;
+            }
+			if ($destinoDir != null) {
+                $this->destinoDir = $destinoDir;
+            }
+			if ($destinoLat != null) {
+                $this->destinoLat = $destinoLat;
+            }
+			if ($destinoLong != null) {
+                $this->destinoLong = $destinoLong;
+            }
+			if ($fecha != null) {
+                $this->fecha = $fecha;
+            }
+			if ($monto != null) {
+                $this->monto = $monto;
+            }
+			if ($idVehiculo != null) {
+                $this->idVehiculo = $idVehiculo;
+            }
+			if ($idCliente != null) {
+                $this->idCliente = $idCliente;
             }
             if ($idChofer != null) {
                 $this->idChofer = $idChofer;
@@ -31,31 +67,34 @@
             if ($estado != null) {
                 $this->estado = $estado;
             }
-            if ($idChofer == null) {
+            /*if ($idChofer == null) {
                 $this->idChofer = 0;
-            }
+            }*/
             if ($encuesta != null) {
                 $this->encuesta = $encuesta;
             }
-            if ($encuesta == null) {
+            /*if ($encuesta == null) {
                 $this->encuesta = 0;
-            }
-            if ($estado == null) {
+            }*/
+            /*if ($estado == null) {
                 $this->estado = "Pendiente";
-            }
+            }*/
             if($id != null){
                 $this->id = $id;
             }
         }
         public function Guardar(){
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO `viaje`(`origenLat`, `origenLong`, `destinoLat`, `destinoLong`, `fecha`, `monto`, `idVehiculo`, `idChofer`, `estado`, `encuesta`)VALUES (:origenLat,:origenLong,:destinoLat,:destinoLong,:fecha,:monto,:idVehiculo,:idChofer,:estado,:encuesta)");
+            $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO `viaje`(`origenDir`, `origenLat`, `origenLong`, `destinoDir`, `destinoLat`, `destinoLong`, `fecha`, `monto`,`idCliente`, `idVehiculo`, `idChofer`, `estado`, `encuesta`)VALUES (:origenDir,:origenLat,:origenLong,:destinoDir,:destinoLat,:destinoLong,:fecha,:monto,:idCliente,:idVehiculo,:idChofer,:estado,:encuesta)");
+            $consulta->bindValue(':origenDir', $this->origenDir, PDO::PARAM_STR);
             $consulta->bindValue(':origenLat', $this->origenLat, PDO::PARAM_STR);
             $consulta->bindValue(':origenLong', $this->origenLong, PDO::PARAM_STR);
+            $consulta->bindValue(':destinoDir', $this->destinoDir, PDO::PARAM_STR);
             $consulta->bindValue(':destinoLat', $this->destinoLat, PDO::PARAM_STR);
             $consulta->bindValue(':destinoLong', $this->destinoLong, PDO::PARAM_STR);
             $consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
             $consulta->bindValue(':monto', $this->monto, PDO::PARAM_STR);
+            $consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
             $consulta->bindValue(':idVehiculo', $this->idVehiculo, PDO::PARAM_INT);
             $consulta->bindValue(':idChofer', $this->idChofer, PDO::PARAM_INT);
             $consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
@@ -75,13 +114,19 @@
             $viaje = viaje::TraerViajePorId($nuevoViaje->id);
             if ($viaje != false) {
                 $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-                $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `origenLat`=:origenLat,`origenLong`=:origenLong,`destinoLat`=:destinoLat,`destinoLong`=:destinoLong,`fecha`=:fecha,`monto`=:monto,`idVehiculo`=:idVehiculo,`idChofer`=:idChofer,`estado`=:estado,`encuesta`=:encuesta WHERE id = :id");
+                $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `origenDir`=:origenDir,`origenLat`=:origenLat,`origenLong`=:origenLong,`destinoDir`=:destinoDir,`destinoLat`=:destinoLat,`destinoLong`=:destinoLong,`fecha`=:fecha,`monto`=:monto,`idCliente`=:idCliente,`idVehiculo`=:idVehiculo,`idChofer`=:idChofer,`estado`=:estado,`encuesta`=:encuesta WHERE id = :id");
+                $consulta->bindValue(':origenDir', $nuevoViaje->origenDir, PDO::PARAM_STR);
                 $consulta->bindValue(':origenLat', $nuevoViaje->origenLat, PDO::PARAM_STR);
                 $consulta->bindValue(':origenLong', $nuevoViaje->origenLong, PDO::PARAM_STR);
+                $consulta->bindValue(':destinoDir', $nuevoViaje->destinoDir, PDO::PARAM_STR);
                 $consulta->bindValue(':destinoLat', $nuevoViaje->destinoLat, PDO::PARAM_STR);
                 $consulta->bindValue(':destinoLong', $nuevoViaje->destinoLong, PDO::PARAM_STR);
                 $consulta->bindValue(':fecha', $nuevoViaje->fecha, PDO::PARAM_STR);
                 $consulta->bindValue(':monto', $nuevoViaje->monto, PDO::PARAM_INT);
+                $consulta->bindValue(':idCliente', $nuevoViaje->idCliente, PDO::PARAM_INT);
+				if ($nuevoViaje->idVehiculo == null || $nuevoViaje->idVehiculo == 0) {
+                    $nuevoViaje->idVehiculo = 0;
+                }
                 $consulta->bindValue(':idVehiculo', $nuevoViaje->idVehiculo, PDO::PARAM_INT);
                 $consulta->bindValue(':idChofer', $nuevoViaje->idChofer, PDO::PARAM_INT);
                 $consulta->bindValue(':estado', $nuevoViaje->estado, PDO::PARAM_STR);
@@ -91,6 +136,7 @@
             }
             if ($itsOk) {
                 $ret['respuesta'] = "El Viaje Se Modifico Exitosamente";
+				$ret['viaje'] = $nuevoViaje;
             }
             else {
                 $ret['respuesta'] = "ERROR, Viaje Inexistente";
@@ -114,10 +160,25 @@
             }
             return $ret;
         }
+        public static function AsignarVehiculo($idViaje,$idVehiculo){
+            //$estado = "En Viaje";
+            $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `idVehiculo`=:idVehiculo WHERE id = :idViaje");
+            $consulta->bindValue(':idViaje', $idViaje, PDO::PARAM_INT);
+            $consulta->bindValue(':idVehiculo', $idVehiculo, PDO::PARAM_INT);
+            $itsOk = $consulta->execute();
+            if ($itsOk) {
+                $ret['respuesta'] = "El Viaje Fue Asignado";
+            }
+            else {
+                $ret['respuesta'] = "ERROR, Al Asignar El Viaje";
+            }
+            return $ret;
+        }
         public static function FinalizarViaje($idViaje,$monto){
             $estado = "Finalizado";
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `estado`=:estado `monto`=:monto WHERE id = :idViaje");
+            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `estado`=:estado, `monto`=:monto WHERE id = :idViaje");
             $consulta->bindValue(':idViaje', $idViaje, PDO::PARAM_INT);
             $consulta->bindValue(':monto', $monto, PDO::PARAM_INT);
             $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
@@ -134,7 +195,7 @@
             $estado = "Cancelado";
             $monto = 0;
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `estado`=:estado `monto`=:monto WHERE id = :idViaje");
+            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `estado`=:estado, `monto`=:monto WHERE id = :idViaje");
             $consulta->bindValue(':idViaje', $idViaje, PDO::PARAM_INT);
             $consulta->bindValue(':monto', $monto, PDO::PARAM_INT);
             $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
@@ -152,7 +213,7 @@
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE `viaje` SET `encuesta`=:encuesta WHERE id = :idViaje");
             $consulta->bindValue(':idViaje', $idViaje, PDO::PARAM_INT);
-            $consulta->bindValue(':encuesta', $encuesta, PDO::PARAM_STR);
+            $consulta->bindValue(':encuesta', $encuesta, PDO::PARAM_INT);
             $itsOk = $consulta->execute();
             if ($itsOk) {
                 $ret['respuesta'] = "La Encuesta Fue Realizada Con Exito"; 
@@ -170,7 +231,7 @@
         }
         public static function TraerViajesPorEstado($estado){
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM vehiculo WHERE estado = :estado");
+            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM viaje WHERE estado = :estado");
             $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_CLASS, 'viaje');;
@@ -186,6 +247,13 @@
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM viaje WHERE idVehiculo = :idVehiculo");
             $consulta->bindValue(':idVehiculo', $idVehiculo, PDO::PARAM_INT);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_CLASS, 'viaje');
+        }
+        public static function TraerViajesPorCliente($idCliente){
+            $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM viaje WHERE idCliente = :idCliente");
+            $consulta->bindValue(':idCliente', $idCliente, PDO::PARAM_INT);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_CLASS, 'viaje');
         }

@@ -29,6 +29,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AgmDirectionModule } from '../../../node_modules/agm-direction';
 import { NgxCaptchaModule } from '../../../node_modules/ngx-captcha';
 import { AbmEncuestaComponent } from '../componentes/abm-encuesta/abm-encuesta.component';
+import { AsignarModalComponent } from '../componentes/asignar-modal/asignar-modal.component';
+import { ChartsModule } from '../../../node_modules/ng2-charts';
+import { EstadisticasComponent } from '../componentes/estadisticas/estadisticas.component';
 // declaro donde quiero que se dirija
 const MiRuteo = [
 {path: '' , component: PrincipalComponent},
@@ -49,6 +52,8 @@ children:
       {path: 'abmEncuesta' , component: AbmEncuestaComponent},
       {path: 'visorViajes' , component: VisorViajesComponent},
       {path: 'abmClientes' , component: AbmClientesComponent},
+      {path: 'asignarModal' , component: AsignarModalComponent},
+      {path: 'estadisticas' , component: EstadisticasComponent},
       {path: 'QuienSoy' , component: QuienSoyComponent}]
 },
 {path: '**' , component: JuegosComponent},
@@ -69,7 +74,8 @@ children:
     AgmCoreModule,
     AgmDirectionModule,
     NgxCaptchaModule,
-    MatSliderModule
+    MatSliderModule,
+    ChartsModule
   ],
   exports: [
     RouterModule

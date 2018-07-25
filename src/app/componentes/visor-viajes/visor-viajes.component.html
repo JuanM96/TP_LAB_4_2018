@@ -1,5 +1,18 @@
 <div class="container">
-    <div class="card">
+    <div class="filtro">
+      <h1>Visor De Viajes</h1>
+      <p>Filtrar: 
+          <mat-form-field>
+            <mat-select placeholder="" [(value)]="filtrarEstado" >
+              <mat-option value="Todos" (click)="actualizarListado()">Todos</mat-option>
+              <mat-option value="Pendiente" (click)="actualizarListado()">Pendiente</mat-option>
+              <mat-option value="EnViaje" (click)="actualizarListado()">En Viaje</mat-option>
+              <mat-option value="Cancelado" (click)="actualizarListado()">Cancelado</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </p>
+    </div>
+    <div class="card" *ngFor="let viaje of listado">
       <div class="map">
         <agm-map [latitude]="lat" [longitude]="lng">
           <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
@@ -8,46 +21,49 @@
       <table class="table mesa">
         <tr>
           <td class="titulos">Cliente:</td>
-          <td class="datos">Cliente:</td>
-        </tr>
-        <tr>
-          <td class="titulos">Destino:</td>
-          <td class="datos">Destino:</td>
+          <td class="datos">{{viaje.idCliente}}</td>
         </tr>
         <tr>
           <td class="titulos">Origen:</td>
-          <td class="datos">Origen:</td>
+          <td class="datos">{{viaje.origenDir}}</td>
+        </tr>
+        <tr>
+          <td class="titulos">Destino:</td>
+          <td class="datos">{{viaje.destinoDir}}</td>
         </tr>
         <tr>
           <td class="titulos">Fecha:</td>
-          <td class="datos">Fecha:</td>
+          <td class="datos">{{viaje.fecha}}</td>
         </tr>
         <tr>
           <td class="titulos">Monto Aprox:</td>
-          <td class="datos">Monto Aprox:</td>
+          <td class="datos">{{viaje.monto}}</td>
         </tr>
         <tr>
           <td class="titulos">Chofer:</td>
-          <td class="datos">Chofer:</td>
+          <td class="datos">{{viaje.idChofer}}</td>
         </tr>
         <tr>
           <td class="titulos">Vehiculo:</td>
-          <td class="datos">Vehiculo:</td>
+          <td class="datos" *ngIf="viaje.idVehiculo != 'Sin Vehiculo'">{{viaje.idVehiculo.marca}} {{viaje.idVehiculo.color}} {{viaje.idVehiculo.patente}}</td>
+          <td class="datos" *ngIf="viaje.idVehiculo == 'Sin Vehiculo'">{{viaje.idVehiculo}}</td>
         </tr>
   
         <tr>
           <td class="titulos">Estado:</td>
-          <td class="datos">Estado:</td>
+          <td class="datos">{{viaje.estado}}</td>
         </tr>
       </table>
       <p>
-        <button mat-raised-button color="warn"  (click)="asignarChofer()">Asignar Chofer</button>
-        <button mat-raised-button color="warn"  (click)="asignarVehiculo()">Asignar Vehiculo</button>
+        <button mat-raised-button color="warn"  (click)="desasignarChofer(viaje)" *ngIf="viaje.idChofer != 'Sin Chofer'">Desasignar Chofer</button>
+        <button mat-raised-button color="warn"  (click)="asignarChofer(viaje.id)" *ngIf="viaje.idChofer == 'Sin Chofer' && viaje.idVehiculo != 'Sin Vehiculo'">Asignar Chofer</button>
+        <button mat-raised-button color="warn"  (click)="desasignarVehiculo(viaje)" *ngIf="viaje.idVehiculo != 'Sin Vehiculo'">Desasignar Vehiculo</button>
+        <button mat-raised-button color="warn"  (click)="asignarVehiculo(viaje.id)" *ngIf="viaje.idVehiculo == 'Sin Vehiculo'">Asignar Vehiculo</button>
       </p>
       <p>
-        <button mat-raised-button color="warn"  (click)="realizarEncuesta()">Realizar Encuesta</button>
+        <button mat-raised-button color="warn"  (click)="realizarEncuesta(viaje.id)" *ngIf="viaje.encuesta == 0 && viaje.estado == 'Finalizado'">Realizar Encuesta</button>
       </p>
-        <button mat-raised-button color="warn"  (click)="Juego('Adivina')">Cancelar Viaje</button>
+        <button mat-raised-button color="warn"  (click)="cancelarViaje(viaje.id)" *ngIf="viaje.idChofer == 'Sin Chofer' && viaje.estado != 'Cancelado'">Cancelar Viaje</button>
       
     </div>
     

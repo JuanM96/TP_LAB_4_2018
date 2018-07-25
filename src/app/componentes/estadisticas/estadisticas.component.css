@@ -1,0 +1,10 @@
+.grafico{
+    display: block;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #ffffffb4;
+    border-radius: 30px;
+    margin-top: 8%;
+}

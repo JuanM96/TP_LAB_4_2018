@@ -90,7 +90,7 @@
             $UsuarioBuscado= $consulta->fetch();
             return $UsuarioBuscado;
         }
-        public static function TraerVehiculosDisponibles($id){
+        public static function TraerVehiculosDisponibles(){
             $objetoAccesoDato = AccesoDatos::DameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM `vehiculo` WHERE id NOT IN (SELECT `idVehiculo` FROM viaje WHERE estado = 'En Viaje')");
             $consulta->execute();
