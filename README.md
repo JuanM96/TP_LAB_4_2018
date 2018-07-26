@@ -12,3 +12,7 @@ El Chofer ingresa a la app y tiene que ponerse a trabajar mediante un boton en e
 # El inicio de la app se ve de la siguiente manera.
 
 https://imgur.com/a/ucm5kaV
+
+# La Pagina de incio Junto Con el Menu de Desplazo se ve de la siguiente manera.
+
+https://imgur.com/a/pxuwiCk
