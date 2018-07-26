@@ -8,3 +8,7 @@ El cliente puede pedir un viaje atravez del ingreso de las direcciones correspon
 El Encargado asigna el chofer al viaje pedido por un cliente,siempre y cuando ese viaje tenga un vehiculo a disposicion, mientras que tambien puede cambiar el vehiculo pedido o cancelar el viaje,
 tambien tiene la posibilidad de deshabilitar tanto a los clientes, como choferes y vehiculos. Tambien tiene a su dispocicion los graficos de las estadisticas como tambien exportarlas a un excel y pdf.
 El Chofer ingresa a la app y tiene que ponerse a trabajar mediante un boton en el menu, luego puede ver los viajes asignados a el, tanto como finalizados y cancelados.
+
+# El inicio de la app se ve de la siguiente manera.
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
