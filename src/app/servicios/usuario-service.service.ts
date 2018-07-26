@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import {MiHttpService} from './mi-http.service';
 @Injectable()
 export class UsuarioServiceService {
-
+  url:string = "https://juanmurciautn.000webhostapp.com";
+  //url:string = "http://localhost";
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
-    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerTodos",token)
+    return this.miHttp.httpGetPromise(this.url/*:8080*/+"/apiRestRemis/usuario/traerTodos",token)
     .then(datos => {
       return datos;
     })
@@ -14,7 +15,7 @@ export class UsuarioServiceService {
     })
   }
   public traerDisponibles(token:string){
-    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerTodosChoferesDisponibles",token)
+    return this.miHttp.httpGetPromise(this.url/*:8080*/+"/apiRestRemis/usuario/traerTodosChoferesDisponibles",token)
     .then(datos => {
       return datos;
     })
@@ -26,7 +27,7 @@ export class UsuarioServiceService {
     let obj:any = {
       perfil:perfil2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerTodosPorPerfil",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/usuario/traerTodosPorPerfil",obj,token)
     .then(datos => {
       return datos;
     })
@@ -38,7 +39,7 @@ export class UsuarioServiceService {
     let obj:any = {
       id:id2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/traerUno",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/usuario/traerUno",obj,token)
     .then(datos => {
       return datos;
     })
@@ -50,7 +51,7 @@ export class UsuarioServiceService {
     let obj:any = {
       id:id2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/empezarATrabajar",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/usuario/empezarATrabajar",obj,token)
     .then(datos => {
       return datos;
     })
@@ -62,7 +63,7 @@ export class UsuarioServiceService {
     let obj:any = {
       id:id2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/dejarDeTrabajar",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/usuario/dejarDeTrabajar",obj,token)
     .then(datos => {
       return datos;
     })
@@ -72,7 +73,7 @@ export class UsuarioServiceService {
   }
   
   public GuardarNuevo(token:string,usuario:any){
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/alta",usuario,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/usuario/alta",usuario,token)
     .then(datos => {
       return datos;
     })
@@ -83,7 +84,7 @@ export class UsuarioServiceService {
     })
   }
   public GuardarEditado(token:string,usuario:any){
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/modificacion",usuario,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/usuario/modificacion",usuario,token)
     .then(datos => {
       return datos;
     })
@@ -97,7 +98,7 @@ export class UsuarioServiceService {
     let obj:any = {
       usuario:usu
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/usuario/baja",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/usuario/baja",obj,token)
     .then(datos => {
       return datos;
     })

@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import {MiHttpService} from './mi-http.service';
 @Injectable()
 export class VehiculoServiceService {
-
+  url:string = "https://juanmurciautn.000webhostapp.com";
+  //url:string = "http://localhost";
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
-    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/vehiculo/traerTodos",token)
+    return this.miHttp.httpGetPromise(this.url/*:8080*/+"/apiRestRemis/vehiculo/traerTodos",token)
     .then(datos => {
       return datos;
     })
@@ -17,7 +18,7 @@ export class VehiculoServiceService {
     let obj:any = {
       patente:patente2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/vehiculo/traerUnoPatente",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/vehiculo/traerUnoPatente",obj,token)
     .then(datos => {
       return datos;
     })
@@ -29,7 +30,7 @@ export class VehiculoServiceService {
     let obj:any = {
       id:idVehiculo
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/vehiculo/traerUnoId",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/vehiculo/traerUnoId",obj,token)
     .then(datos => {
       return datos;
     })
@@ -38,7 +39,7 @@ export class VehiculoServiceService {
     })
   }
   public traerDisponibles(token:string){
-    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/vehiculo/traerDisponibles",token)
+    return this.miHttp.httpGetPromise(this.url/*:8080*/+"/apiRestRemis/vehiculo/traerDisponibles",token)
     .then(datos => {
       return datos;
     })
@@ -47,7 +48,7 @@ export class VehiculoServiceService {
     })
   }
   public GuardarNuevo(token:string,vehiculo:any){
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/vehiculo/alta",vehiculo,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/vehiculo/alta",vehiculo,token)
     .then(datos => {
       return datos;
     })
@@ -58,7 +59,7 @@ export class VehiculoServiceService {
     })
   }
   public GuardarEditado(token:string,vehiculo:any){
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/vehiculo/modificacion",vehiculo,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/vehiculo/modificacion",vehiculo,token)
     .then(datos => {
       return datos;
     })
@@ -72,7 +73,7 @@ export class VehiculoServiceService {
     let obj:any = {
       id:idVehiculo
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/vehiculo/baja",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/vehiculo/baja",obj,token)
     .then(datos => {
       return datos;
     })

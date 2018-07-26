@@ -15,7 +15,9 @@
     <div class="card" *ngFor="let viaje of listado">
       <div class="map">
         <agm-map [latitude]="lat" [longitude]="lng">
-          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          <agm-direction
+            [origin]="viaje.dir.origin" [destination]="viaje.dir.destination" [provideRouteAlternatives]="true">
+          </agm-direction>
         </agm-map>
       </div>
       <table class="table mesa">
@@ -66,5 +68,4 @@
         <button mat-raised-button color="warn"  (click)="cancelarViaje(viaje.id)" *ngIf="viaje.idChofer == 'Sin Chofer' && viaje.estado != 'Cancelado'">Cancelar Viaje</button>
       
     </div>
-    
   </div>

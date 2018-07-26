@@ -1,6 +1,7 @@
 <div class="container">
   <h1 class="caja">Listado De Todos Los Choferes</h1>
   <div class="tabla">
+    <button kendo-button mat-raised-button color="primary" (click)="pdfTabla()" style="margin-top: 10px;margin-bottom: 10px;">Exportar PDF</button>
     <ng2-smart-table [settings]="settings" [source]="listado" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table> 
   </div>
 </div>

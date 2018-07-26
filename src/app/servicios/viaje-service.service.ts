@@ -3,10 +3,12 @@ import {MiHttpService} from './mi-http.service';
 
 @Injectable()
 export class ViajeServiceService {
-
+  url:string = "https://juanmurciautn.000webhostapp.com";
+  //url:string = "http://localhost";
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
-    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodos",token)
+    //return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodos",token)
+    return this.miHttp.httpGetPromise(this.url/*:8080*/+"/apiRestRemis/viaje/traerTodos",token)
     .then(datos => {
       return datos;
     })
@@ -18,7 +20,8 @@ export class ViajeServiceService {
     let obj:any = {
       estado:estado2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorEstado",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorEstado",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/traerTodosPorEstado",obj,token)
     .then(datos => {
       return datos;
     })
@@ -30,7 +33,8 @@ export class ViajeServiceService {
     let obj:any = {
       idChofer:idChofer2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorChofer",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorChofer",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/traerTodosPorChofer",obj,token)
     .then(datos => {
       return datos;
     })
@@ -42,7 +46,8 @@ export class ViajeServiceService {
     let obj:any = {
       idVehiculo:idVehiculo2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorVehiculo",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorVehiculo",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/traerTodosPorVehiculo",obj,token)
     .then(datos => {
       return datos;
     })
@@ -54,7 +59,8 @@ export class ViajeServiceService {
     let obj:any = {
       idCliente:idCliente2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorCliente",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/traerTodosPorCliente",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodosPorCliente",obj,token)
     .then(datos => {
       return datos;
     })
@@ -66,7 +72,8 @@ export class ViajeServiceService {
     let obj:any = {
       id:id2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerPorId",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/traerPorId",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerPorId",obj,token)
     .then(datos => {
       return datos;
     })
@@ -79,7 +86,8 @@ export class ViajeServiceService {
     let obj:any = {
       idViaje:id2
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/realizarEncuesta",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/realizarEncuesta",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/realizarEncuesta",obj,token)
     .then(datos => {
       return datos;
     })
@@ -92,7 +100,8 @@ export class ViajeServiceService {
       idViaje:idViajeA,
       idChofer:idChoferA
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/asignarChofer",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/asignarChofer",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/asignarChofer",obj,token)
     .then(datos => {
       return datos;
     })
@@ -105,7 +114,8 @@ export class ViajeServiceService {
       idViaje:idViajeA,
       idVehiculo:idVehiculoA
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/asignarVehiculo",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/asignarVehiculo",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/asignarVehiculo",obj,token)
     .then(datos => {
       return datos;
     })
@@ -114,7 +124,8 @@ export class ViajeServiceService {
     })
   }
   public GuardarNuevo(token:string,viaje:any){
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/alta",viaje,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/alta",viaje,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/alta",viaje,token)
     .then(datos => {
       return datos;
     })
@@ -125,7 +136,8 @@ export class ViajeServiceService {
     })
   }
   public GuardarEditado(token:string,viaje:any){
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/modificacion",viaje,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/modificacion",viaje,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/modificacion",viaje,token)
     .then(datos => {
       return datos;
     })
@@ -140,7 +152,8 @@ export class ViajeServiceService {
     let obj:any = {
       id:idViaje
     }
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/baja",obj,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/baja",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/baja",obj,token)
     .then(datos => {
       return datos;
     })

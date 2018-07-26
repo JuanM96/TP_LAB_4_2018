@@ -29,21 +29,58 @@
           </div>
       </div>
   </div> -->
-<div class="col-md-6 grafico margen">
-    <h1 style="margin-bottom: 20px !important">Estadisticas De Los Viajes</h1>
-    <canvas baseChart
-    [data]="doughnutChartData"
-    [labels]="doughnutChartLabels"
-    [chartType]="doughnutChartType"
-    (chartHover)="chartHovered($event)"
-    (chartClick)="chartClicked($event)"></canvas>
+<div id="pdfSpace">
+    <!-- <kendo-pdf-export #pdf paperSize="A4" margin="2cm"> -->
+            <div class="col-md-6 grafico margen">
+                    <h1>Estadisticas De Los Viajes</h1>
+                    <h3>Cantidad de Viajes:</h3>
+                    <h3 class="cantViajes">{{viajesCant}}</h3>
+                    <canvas baseChart style="margin-bottom: 15px;" *ngIf="mostrar == true"
+                    [data]="graficoViajesData"
+                    [labels]="graficoViajesLabels"
+                    [chartType]="graficoViajesType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                    <div class="botones">
+                        <button mat-raised-button color="primary" (click)="exportarExcelViajes()">Exportar Excel</button>
+                    </div>
+                </div>
+                <div class="col-md-6 grafico">
+                    <h1>Estadisticas De Las Encuestas</h1>
+                    <h3 *ngIf="preguntaNro == 'Pregunta 1'">{{pregunta1}}</h3>
+                    <h3 *ngIf="preguntaNro == 'Pregunta 2'">{{pregunta2}}</h3>
+                    <h3 *ngIf="preguntaNro == 'Pregunta 3'">{{pregunta3}}</h3>
+                    <div class="seleccion">
+                        <mat-form-field>
+                            <mat-select placeholder="" [(value)]="preguntaNro" >
+                                <mat-option value="Pregunta 1" (click)="actualizarConteoEncuestas('Pregunta 1')">Pregunta 1</mat-option>
+                                <mat-option value="Pregunta 2" (click)="actualizarConteoEncuestas('Pregunta 2')">Pregunta 2</mat-option>
+                                <mat-option value="Pregunta 3" (click)="actualizarConteoEncuestas('Pregunta 3')">Pregunta 3</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <canvas baseChart *ngIf="preguntaNro == 'Pregunta 1'" style="margin-bottom: 15px;"
+                    [data]="graficoEncuestasData1"
+                    [labels]="graficoEncuestasLabels1"
+                    [chartType]="graficoEncuestasType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                    <canvas baseChart *ngIf="preguntaNro == 'Pregunta 2'" style="margin-bottom: 15px;"
+                    [data]="graficoEncuestasData2"
+                    [labels]="graficoEncuestasLabels2"
+                    [chartType]="graficoEncuestasType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                    <canvas baseChart *ngIf="preguntaNro == 'Pregunta 3'" style="margin-bottom: 15px;"
+                    [data]="graficoEncuestasData3"
+                    [labels]="graficoEncuestasLabels3"
+                    [chartType]="graficoEncuestasType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                    <div class="botones">
+                        <button mat-raised-button color="primary" (click)="exportarExcelEncuestas()">Exportar Excel</button>
+                    </div>
+                </div>
+    
 </div>
-<div class="col-md-6 grafico">
-    <h1 style="margin-bottom: 20px !important">Estadisticas De Los Viajes</h1>
-    <canvas baseChart
-    [data]="doughnutChartData"
-    [labels]="doughnutChartLabels"
-    [chartType]="doughnutChartType"
-    (chartHover)="chartHovered($event)"
-    (chartClick)="chartClicked($event)"></canvas>
-</div>
+

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VehiculoServiceService } from '../../servicios/vehiculo-service.service';
-import { MatSnackBar } from '../../../../node_modules/@angular/material';
+import { MatSnackBar, MatDialog } from '../../../../node_modules/@angular/material';
 import { Router } from '../../../../node_modules/@angular/router';
+import { PdfpreviewComponent } from '../pdfpreview/pdfpreview.component';
 @Component({
   selector: 'app-abm-vehiculos',
   templateUrl: './abm-vehiculos.component.html',
@@ -57,7 +58,7 @@ export class AbmVehiculosComponent implements OnInit {
     }
 
   };
-  constructor(public vehiculoService:VehiculoServiceService,public snackBar: MatSnackBar,public router:Router) {
+  constructor(public vehiculoService:VehiculoServiceService,public snackBar: MatSnackBar,public router:Router,public dialog:MatDialog) {
     this.actualizarListado();
     /*if (ret["error"]) {
       alert(ret["errorMsg"]);
@@ -142,5 +143,14 @@ export class AbmVehiculosComponent implements OnInit {
       duration: 500,
     });*/
   }
-
+  pdfTabla(){
+    const dialogRef = this.dialog.open(PdfpreviewComponent, {
+      width: '600px',
+      data: {imprimir:"Vehiculos"}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.info(result);
+    });
+}
 }

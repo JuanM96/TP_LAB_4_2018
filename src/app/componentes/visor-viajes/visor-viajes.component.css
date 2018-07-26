@@ -2,12 +2,12 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
-    max-width: 400px;
-   height: 100%;
+    max-width: 350px;
+    height: 100%;
     margin: 10px;
     padding-bottom: 10px;
     float: left;
-  background-color: #a52a2a;
+    background-color: #a52a2a;
     text-align: center;
     color: white;
 }

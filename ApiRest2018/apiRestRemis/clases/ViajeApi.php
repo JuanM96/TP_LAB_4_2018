@@ -9,12 +9,12 @@ class ViajeApi
 {
     public function AltaViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $viaje = new viaje($ArrayDeParametros['origenDir'],$ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoDir'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idCliente'],$ArrayDeParametros['idVehiculo']);
+        $viaje = new viaje($ArrayDeParametros['origenDir'],$ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoDir'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['hora'],$ArrayDeParametros['duracion'],$ArrayDeParametros['distancia'],$ArrayDeParametros['idCliente'],$ArrayDeParametros['idVehiculo'],$ArrayDeParametros['idChofer'],$ArrayDeParametros['estado'],$ArrayDeParametros['encuesta']);
         return $response->withJson($viaje->Guardar());
     }
     public function ModificarViaje($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $viaje = new viaje($ArrayDeParametros['origenDir'],$ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoDir'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['idCliente'],$ArrayDeParametros['idVehiculo'],$ArrayDeParametros['idChofer'],$ArrayDeParametros['estado'],$ArrayDeParametros['encuesta'],$ArrayDeParametros['id']);
+        $viaje = new viaje($ArrayDeParametros['origenDir'],$ArrayDeParametros['origenLat'],$ArrayDeParametros['origenLong'],$ArrayDeParametros['destinoDir'],$ArrayDeParametros['destinoLat'],$ArrayDeParametros['destinoLong'],$ArrayDeParametros['fecha'],$ArrayDeParametros['monto'],$ArrayDeParametros['hora'],$ArrayDeParametros['duracion'],$ArrayDeParametros['distancia'],$ArrayDeParametros['idCliente'],$ArrayDeParametros['idVehiculo'],$ArrayDeParametros['idChofer'],$ArrayDeParametros['estado'],$ArrayDeParametros['encuesta'],$ArrayDeParametros['id']);
         return $response->withJson(viaje::Modificar($viaje));
 		//return $response->withJson($ArrayDeParametros['idChofer']);
     }

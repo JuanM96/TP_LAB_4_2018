@@ -88,9 +88,18 @@ export class VisorViajesComponent implements OnInit {
     this.filtrarListado();
     this.viajeService.traerListaCompleta(localStorage.getItem('token')).then(datos =>{
       this.listadoViajes = datos;
+      this.agregarDirAListado();
       console.info(datos);
     });
 
+  }
+  agregarDirAListado(){
+    this.listado.forEach(element => {
+      element.dir = {
+        origin:this.getJson(element.origenLat,element.origenLong),
+        destination:this.getJson(element.destinoLat,element.destinoLong)
+      };
+    });
   }
   filtrarListado(){
     switch (this.filtrarEstado) {
@@ -124,6 +133,7 @@ export class VisorViajesComponent implements OnInit {
             
             this.listado.push(viaje);
           });
+          this.agregarDirAListado();
         }).catch(error =>{
           console.log(error)
         })
@@ -158,6 +168,7 @@ export class VisorViajesComponent implements OnInit {
             
             this.listado.push(viaje);
           });
+          this.agregarDirAListado();
         }).catch(error =>{
           console.log(error)
         })
@@ -192,6 +203,8 @@ export class VisorViajesComponent implements OnInit {
             
             this.listado.push(viaje);
           });
+          this.agregarDirAListado();
+
         }).catch(error =>{
           console.log(error)
         })
@@ -226,6 +239,7 @@ export class VisorViajesComponent implements OnInit {
             
             this.listado.push(viaje);
           });
+          this.agregarDirAListado();
         }).catch(error =>{
           console.log(error)
         })
@@ -316,5 +330,11 @@ export class VisorViajesComponent implements OnInit {
       console.info(datos._body);
       this.openSnackBar("Viaje Cancelado con Exito");
     })
+  }
+  getJson(lat2:number,lng2:number){
+    return {
+      lat:lat2,
+      lng:lng2
+    };
   }
 }

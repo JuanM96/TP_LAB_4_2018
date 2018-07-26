@@ -7,4 +7,13 @@
     background-color: #ffffffb4;
     border-radius: 30px;
     margin-top: 8%;
+    
+}
+.cantViajes{
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.botones{
+    margin: 0 auto;
+    margin-bottom: 10px;
 }

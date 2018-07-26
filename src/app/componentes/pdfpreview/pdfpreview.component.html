@@ -1,0 +1,51 @@
+<kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+  <!-- <table>
+    <tr>
+      <th>ID</th>
+      <th>OrigenDir</th>
+      <th>OrigenLat</th>
+      <th>OrigenLong</th>
+      <th>DestinoDir</th>
+      <th>DestinoLat</th>
+      <th>DestinoLong</th>
+      <th>Fecha</th>
+      <th>Monto</th>
+      <th>idCliente</th>
+      <th>idVehiculo</th>
+      <th>idChofer</th>
+      <th>Estado</th>
+      <th>Encuesta</th>
+    </tr>
+    <tr *ngFor="let viaje of listado">
+      <td>{{viaje.id}}</td>
+      <td>{{viaje.origenDir}}</td>
+      <td>{{viaje.origenLat}}</td>
+      <td>{{viaje.origenLong}}</td>
+      <td>{{viaje.destinoDir}}</td>
+      <td>{{viaje.destinoLat}}</td>
+      <td>{{viaje.destinoLong}}</td>
+      <td>{{viaje.fecha}}</td>
+      <td>{{viaje.monto}}</td>
+      <td>{{viaje.idCliente}}</td>
+      <td>{{viaje.idVehiculo}}</td>
+      <td>{{viaje.idChofer}}</td>
+      <td>{{viaje.estado}}</td>
+      <td>{{viaje.encuesta}}</td>
+    </tr>
+  </table> -->
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Marca</th>
+      <th>Color</th>
+      <th>Patente</th>
+    </tr>
+    <tr *ngFor="let vehiculo of listado">
+      <td>{{vehiculo.id}}</td>
+      <td>{{vehiculo.marca}}</td>
+      <td>{{vehiculo.color}}</td>
+      <td>{{vehiculo.patente}}</td>
+    </tr>
+  </table>
+</kendo-pdf-export>
+<button kendo-button mat-raised-button color="primary" (click)="pdf.saveAs('document.pdf')">Exportar PDF</button>

@@ -50,6 +50,7 @@ export class PrincipalComponent implements OnInit {
         localStorage.setItem("usuario",datos["usuario"]["usuario"]);
         localStorage.setItem("nombre",datos["usuario"]["nombre"]);
         localStorage.setItem("perfil",datos["usuario"]["perfil"]);
+        localStorage.setItem("id",datos["usuario"]["id"]);
         localStorage.setItem('isLoggedin', 'true');
         this.router.navigate(['/Remiseria']);
       }

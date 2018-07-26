@@ -16,7 +16,7 @@ import { HistorialDeJugadasComponent } from '../componentes/historial-de-jugadas
 import { PiedraPapelTijeraComponent } from '../componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatSliderModule} from '@angular/material';
+import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatSliderModule, MatSpinner} from '@angular/material';
 import { TicTacToeComponent } from '../componentes/tic-tac-toe/tic-tac-toe.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AbmChoferesComponent } from '../componentes/abm-choferes/abm-choferes.component';
@@ -32,6 +32,10 @@ import { AbmEncuestaComponent } from '../componentes/abm-encuesta/abm-encuesta.c
 import { AsignarModalComponent } from '../componentes/asignar-modal/asignar-modal.component';
 import { ChartsModule } from '../../../node_modules/ng2-charts';
 import { EstadisticasComponent } from '../componentes/estadisticas/estadisticas.component';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { PdfpreviewComponent } from '../componentes/pdfpreview/pdfpreview.component';
+//import { PdfpreviewComponent } from './componentes/pdfpreview/pdfpreview.component';
+
 // declaro donde quiero que se dirija
 const MiRuteo = [
 {path: '' , component: PrincipalComponent},
@@ -54,6 +58,7 @@ children:
       {path: 'abmClientes' , component: AbmClientesComponent},
       {path: 'asignarModal' , component: AsignarModalComponent},
       {path: 'estadisticas' , component: EstadisticasComponent},
+      {path: 'previewPdf' , component: PdfpreviewComponent},
       {path: 'QuienSoy' , component: QuienSoyComponent}]
 },
 {path: '**' , component: JuegosComponent},
@@ -75,7 +80,8 @@ children:
     AgmDirectionModule,
     NgxCaptchaModule,
     MatSliderModule,
-    ChartsModule
+    ChartsModule,
+    PDFExportModule ,
   ],
   exports: [
     RouterModule

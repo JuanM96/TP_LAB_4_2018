@@ -21,7 +21,7 @@ export class AbmEncuestaComponent implements OnInit {
     respuesta1:"",
     pregunta2:"¿Como Calificaria El Servicio?",
     respuesta2:"",
-    pregunta3:"¿Del 1 al 5 que tan satisfactorio fuel el viaje?",
+    pregunta3:"¿Del 1 al 5 que tan satisfactorio fue el viaje?",
     respuesta3:"",
   }
   constructor(public snackBar:MatSnackBar,public dialogRef: MatDialogRef<VisorViajesComponent>,public encuestaService:EncuestaServiceService,public viajeService:ViajeServiceService,@Inject(MAT_DIALOG_DATA) public data: DialogData) {

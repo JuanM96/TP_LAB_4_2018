@@ -3,10 +3,11 @@ import { MiHttpService } from './mi-http.service';
 
 @Injectable()
 export class EncuestaServiceService {
-
+  url:string = "https://juanmurciautn.000webhostapp.com";
+  //url:string = "http://localhost";
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
-    return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/encuesta/traerTodos",token)
+    return this.miHttp.httpGetPromise(this.url /*:8080*/+"/apiRestRemis/encuesta/traerTodos",token)
     .then(datos => {
       return datos;
     })
@@ -15,7 +16,7 @@ export class EncuestaServiceService {
     })
   }
   public GuardarNuevo(token:string,encuesta:any){
-    return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/encuesta/alta",encuesta,token)
+    return this.miHttp.httpPostPromiseWithToken(this.url /*:8080*/+"/apiRestRemis/encuesta/alta",encuesta,token)
     .then(datos => {
       return datos;
     })

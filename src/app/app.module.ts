@@ -37,7 +37,7 @@ import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormField, MatFormFieldModule, MatSliderChange, MatSliderModule} from '@angular/material';
+import {MatCardModule,MatSelectModule,MatInputModule,MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormField, MatFormFieldModule, MatSliderChange, MatSliderModule, MatDatepicker, MatDatepickerModule, MatNativeDateModule, MatSpinner} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRadioModule} from '@angular/material/radio';
@@ -61,6 +61,10 @@ import { AsignarModalComponent } from './componentes/asignar-modal/asignar-modal
 import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
 import { ChartsModule } from 'ng2-charts';
 import { EncuestaServiceService } from './servicios/encuesta-service.service';
+import { AmazingTimePickerModule } from 'amazing-time-picker'; // this line you need
+import { ArchivoServiceService } from './servicios/archivo-service.service';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { PdfpreviewComponent } from './componentes/pdfpreview/pdfpreview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +88,8 @@ import { EncuestaServiceService } from './servicios/encuesta-service.service';
     VisorViajesComponent,
     AbmEncuestaComponent,
     AsignarModalComponent,
-    EstadisticasComponent
+    EstadisticasComponent,
+    PdfpreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,22 +107,26 @@ import { EncuestaServiceService } from './servicios/encuesta-service.service';
     MatSnackBarModule,
     MatRadioModule,
     MatDialogModule,
-    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule, 
     AgmCoreModule.forRoot({
       apiKey:"AIzaSyAKjO3Geo8sXZrg7CQNXPyTpj4_zA1qDzg",
-      libraries: ["places"]
+      libraries: ["places","geometry"]
     }),
     AgmDirectionModule,
+    AmazingTimePickerModule,
     NgxCaptchaModule.forRoot({
       reCaptcha2SiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // optional, can be overridden with 'siteKey' component property
     }),
     MatSliderModule,
-    ChartsModule
+    ChartsModule,
+    PDFExportModule,
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [JuegoServiceService,MiHttpService,UsuarioServiceService,ViajeServiceService,VehiculoServiceService,EncuestaServiceService],
+  providers: [JuegoServiceService,MiHttpService,UsuarioServiceService,ViajeServiceService,VehiculoServiceService,EncuestaServiceService,ArchivoServiceService],
   bootstrap: [AppComponent],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
 })

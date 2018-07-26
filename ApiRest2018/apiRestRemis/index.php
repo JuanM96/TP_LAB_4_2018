@@ -66,7 +66,7 @@ $app->group('/viaje', function () {
 }) ->add(\verificarJWT::class . ':VerificarToken') ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 $app->group('/encuesta', function () {
     $this->post('/alta', \EncuestaApi::class . ':altaEncuesta');
-    $this->get('/traerTodos', \EncuestaApi::class . ':traerEncuesta');
+    $this->get('/traerTodos', \EncuestaApi::class . ':traerEncuestas');
 }) ->add(\verificarJWT::class . ':VerificarToken') ->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 $app->group('/ingreso', function () {
     $this->post('/logIn', \UsuarioApi::class . ':LogIn');

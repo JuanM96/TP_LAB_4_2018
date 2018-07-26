@@ -70,7 +70,7 @@ export class MenuComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AbmViajesComponent, {
-      width: '400px',
+      width: '600px',
       data: this.viaje
     });
 

@@ -1,8 +1,10 @@
+<kendo-pdf-export #pdf paperSize="A4" margin="2cm">
 <div class="container">
   <h1 class="caja">Listado De Todos Los Choferes</h1>
   <div class="tabla">
     <ng2-smart-table [settings]="settings" [source]="listado" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table> 
   </div>
 </div>
-
+</kendo-pdf-export>
+<button kendo-button (click)="pdf.saveAs('document.pdf')"> PDF</button>
 <!-- (create)="OnCreate($event)" (edit)="OnEdit($event)" (delete)="OnDelete($event)" -->
