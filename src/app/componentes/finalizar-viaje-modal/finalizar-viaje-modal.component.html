@@ -1,0 +1,7 @@
+<h1>Ingrese El Valor Del Viaje</h1>
+<h2>Consto Aproximado {{montoAprox}}</h2>
+<mat-form-field class="example-full-width" >
+  <input matInput placeholder="" [(ngModel)]="montoIng">
+</mat-form-field>
+<button mat-raised-button (click)="onNoClick()">Cancelar</button>
+<button mat-raised-button (click)="aceptar()" cdkFocusInitial>Aceptar</button>

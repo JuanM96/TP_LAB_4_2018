@@ -54,7 +54,7 @@ $app->group('/viaje', function () {
     $this->post('/modificacion', \ViajeApi::class . ':ModificarViaje');
     $this->post('/asignarChofer', \ViajeApi::class . ':AsignarElChofer');
     $this->post('/asignarVehiculo', \ViajeApi::class . ':AsignarElVehiculo');
-    $this->post('/finaliarViaje', \ViajeApi::class . ':FinalizarElViaje');
+    $this->post('/finalizarViaje', \ViajeApi::class . ':FinalizarElViaje');
     $this->post('/cancelarViaje', \ViajeApi::class . ':CancelarElViaje');
     $this->post('/realizarEncuesta', \ViajeApi::class . ':RealizarEncuesta');
     $this->get('/traerTodos', \ViajeApi::class . ':traerViajes');

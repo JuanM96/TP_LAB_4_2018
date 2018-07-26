@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {MiHttpService} from './mi-http.service';
 @Injectable()
 export class VehiculoServiceService {
-  url:string = "https://juanmurciautn.000webhostapp.com";
-  //url:string = "http://localhost";
+  //url:string = "https://juanmurciautn.000webhostapp.com";
+  url:string = "http://localhost";
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
     return this.miHttp.httpGetPromise(this.url/*:8080*/+"/apiRestRemis/vehiculo/traerTodos",token)

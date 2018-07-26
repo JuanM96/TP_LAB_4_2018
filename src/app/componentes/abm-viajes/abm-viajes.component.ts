@@ -249,30 +249,38 @@ export class AbmViajesComponent implements OnInit {
     return s;
   }
   aceptarViaje(){
-    let auxFecha:Date = new Date();
-    auxFecha.setTime(Date.parse(this.fechaSalida));
-    this.viaje.origenDir = (this.searchElementRef.nativeElement as HTMLInputElement).value;
-    this.viaje.origenLat = this.latA;
-    this.viaje.origenLong = this.lngA;
-    this.viaje.destinoDir = (this.searchElementRefB.nativeElement as HTMLInputElement).value;
-    this.viaje.destinoLat = this.latB;
-    this.viaje.destinoLong = this.lngB;
-    this.viaje.fecha = auxFecha.getDate() + "/" + (auxFecha.getMonth()+1) + "/" + auxFecha.getFullYear();
-    this.viaje.hora = this.horaSalida;
-    this.viaje.monto = this.calcularMontoAprox();
-    this.viaje.duracion = this.tiempoEstimado;
-    this.viaje.distancia = this.distanciaTotal;
-    this.viaje.idCliente = parseInt(localStorage.getItem('id'));
-    if (!this.premium) {
-      this.viaje.idVehiculo = this.listado[0].id; 
+    if ((this.searchElementRef.nativeElement as HTMLInputElement).value == "" || (this.searchElementRefB.nativeElement as HTMLInputElement).value == "") {
+      this.openSnackBar("PorFavor Rellene Todos los Campos");
     }
-    console.info(this.viaje);
-    this.viajeService.GuardarNuevo(localStorage.getItem('token'),this.viaje).then(datos =>{
-      console.info(datos._body);
-      console.info(datos);
-      this.openSnackBar(datos.respuesta);
-      this.dialogRef.close();
-    })
+    else if ((this.searchElementRef.nativeElement as HTMLInputElement).value != "" && (this.searchElementRefB.nativeElement as HTMLInputElement).value != "") {
+      console.log((this.searchElementRef.nativeElement as HTMLInputElement).value);
+      let auxFecha:Date = new Date();
+      auxFecha.setTime(Date.parse(this.fechaSalida));
+      this.viaje.origenDir = (this.searchElementRef.nativeElement as HTMLInputElement).value;
+      this.viaje.origenLat = this.latA;
+      this.viaje.origenLong = this.lngA;
+      this.viaje.destinoDir = (this.searchElementRefB.nativeElement as HTMLInputElement).value;
+      this.viaje.destinoLat = this.latB;
+      this.viaje.destinoLong = this.lngB;
+      this.viaje.fecha = auxFecha.getDate() + "/" + (auxFecha.getMonth()+1) + "/" + auxFecha.getFullYear();
+      this.viaje.hora = this.horaSalida;
+      this.viaje.monto = parseInt(this.calcularMontoAprox().toString(),0);
+      this.viaje.duracion = this.tiempoEstimado;
+      this.viaje.distancia = this.distanciaTotal;
+      this.viaje.idCliente = parseInt(localStorage.getItem('id'));
+      if (!this.premium) {
+        this.viaje.idVehiculo = this.listado[0].id; 
+      }
+      console.info(this.viaje);
+      this.viajeService.GuardarNuevo(localStorage.getItem('token'),this.viaje).then(datos =>{
+        //console.info(datos._body);
+        console.info(datos);
+        this.openSnackBar(datos.respuesta);
+        this.dialogRef.close();
+      })
+    }
+      
+    
   }
   borrarCampos(){
     this.searchElementRef.nativeElement.value = "";

@@ -23,13 +23,15 @@
     padding: 15px 15px;
     font-size: 18px;
     line-height: 20px;
-
   }
-  .navbar-button-right{
+  .navbar-button-center{
     /*height: 50px;
     padding: 15px 15px;
     line-height: 20px;*/
     font-size: 18px;
+    float: right;
+  }
+  .navbar-button-right{
     float: right;
   }
   .navbar-button:hover{

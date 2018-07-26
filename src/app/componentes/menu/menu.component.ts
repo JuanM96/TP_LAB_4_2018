@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AbmViajesComponent } from '../abm-viajes/abm-viajes.component';
-import { MatDialog } from '../../../../node_modules/@angular/material';
+import { MatDialog, MatSnackBar } from '../../../../node_modules/@angular/material';
+import { UsuarioServiceService } from '../../servicios/usuario-service.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,6 +10,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  isCollapsed:boolean = true;
   viaje = {
     origenLat: 0,
     origenLong: 0,
@@ -33,8 +35,13 @@ export class MenuComponent implements OnInit {
     idVehiculo: 0,
     estado: ""
   }
+  perfil:string;
+  estado:string;
   constructor(private route: ActivatedRoute,
-    private router: Router,public dialog: MatDialog) { }
+    private router: Router,public dialog: MatDialog,public usuarioServie:UsuarioServiceService,public snackBar:MatSnackBar) {
+      this.perfil = localStorage.getItem('perfil');
+      this.estado = localStorage.getItem('estado');
+     }
 
   ngOnInit() {
   }
@@ -85,5 +92,26 @@ export class MenuComponent implements OnInit {
     localStorage.setItem('usuario',"");
     this.router.navigate(["/"]);
   }
-  
+  empezarATrabajar(){
+    this.usuarioServie.ponerATrabajar(localStorage.getItem('token'),parseInt(localStorage.getItem('id'))).then(datos =>{
+      console.info(datos);
+      this.openSnackBar(datos.respuesta);
+      localStorage.setItem('estado','Trabajando');
+      this.estado = localStorage.getItem('estado');
+    })
+  }
+  dejarDeTrabajar(){
+    this.usuarioServie.dejarDeTrabajar(localStorage.getItem('token'),parseInt(localStorage.getItem('id'))).then(datos =>{
+      console.info(datos);
+      this.openSnackBar(datos.respuesta);
+      localStorage.setItem('estado','En Casa');
+      this.estado = localStorage.getItem('estado');
+    })
+  }
+  openSnackBar(msg:string) {
+    this.snackBar.open(msg,'OK',{duration:3000});
+    /*this.snackBar.openFromComponent(PizzaPartyComponent, {
+      duration: 500,
+    });*/
+  }
 }

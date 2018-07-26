@@ -3,8 +3,8 @@ import {MiHttpService} from './mi-http.service';
 
 @Injectable()
 export class ViajeServiceService {
-  url:string = "https://juanmurciautn.000webhostapp.com";
-  //url:string = "http://localhost";
+  //url:string = "https://juanmurciautn.000webhostapp.com";
+  url:string = "http://localhost";
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
     //return this.miHttp.httpGetPromise("http://localhost"/*:8080*/+"/apiRestRemis/viaje/traerTodos",token)
@@ -153,6 +153,22 @@ export class ViajeServiceService {
       id:idViaje
     }
     return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/baja",obj,token)
+    //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/baja",obj,token)
+    .then(datos => {
+      return datos;
+    })
+    .catch(error =>{
+      console.log(error);
+      console.info(error);
+      return error;
+    })
+  }
+  public FinalizarViaje(token:string,idViaje:number,montoIng:number){
+    let obj:any = {
+      id:idViaje,
+      monto:montoIng
+    }
+    return this.miHttp.httpPostPromiseWithToken(this.url/*:8080*/+"/apiRestRemis/viaje/finalizarViaje",obj,token)
     //return this.miHttp.httpPostPromiseWithToken("http://localhost"/*:8080*/+"/apiRestRemis/viaje/baja",obj,token)
     .then(datos => {
       return datos;

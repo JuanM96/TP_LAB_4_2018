@@ -111,6 +111,12 @@
             $consulta->bindValue(':distancia', $this->distancia, PDO::PARAM_INT);
             $consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
             $consulta->bindValue(':idVehiculo', $this->idVehiculo, PDO::PARAM_INT);
+            if($this->idChofer == null){
+				$this->idChofer = 0;
+			}
+			if($this->encuesta == null){
+				$this->encuesta = 0;
+			}
             $consulta->bindValue(':idChofer', $this->idChofer, PDO::PARAM_INT);
             $consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
             $consulta->bindValue(':encuesta', $this->encuesta, PDO::PARAM_INT);

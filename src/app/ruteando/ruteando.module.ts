@@ -34,6 +34,8 @@ import { ChartsModule } from '../../../node_modules/ng2-charts';
 import { EstadisticasComponent } from '../componentes/estadisticas/estadisticas.component';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { PdfpreviewComponent } from '../componentes/pdfpreview/pdfpreview.component';
+import { CollapseModule } from '../../../node_modules/ngx-bootstrap/collapse';
+import { FinalizarViajeModalComponent } from '../componentes/finalizar-viaje-modal/finalizar-viaje-modal.component';
 //import { PdfpreviewComponent } from './componentes/pdfpreview/pdfpreview.component';
 
 // declaro donde quiero que se dirija
@@ -59,6 +61,7 @@ children:
       {path: 'asignarModal' , component: AsignarModalComponent},
       {path: 'estadisticas' , component: EstadisticasComponent},
       {path: 'previewPdf' , component: PdfpreviewComponent},
+      {path: 'finalizarViaje' , component: FinalizarViajeModalComponent},
       {path: 'QuienSoy' , component: QuienSoyComponent}]
 },
 {path: '**' , component: JuegosComponent},
@@ -82,6 +85,7 @@ children:
     MatSliderModule,
     ChartsModule,
     PDFExportModule ,
+    CollapseModule
   ],
   exports: [
     RouterModule

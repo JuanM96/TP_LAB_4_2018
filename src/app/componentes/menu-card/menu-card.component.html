@@ -1,11 +1,8 @@
 <div class="container fondo" >
-  <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
     <div class="cuadro">
       <h1 class="titulo">Bienvenido {{nombre}}</h1>
       <p class="parrafo">Utilice el menu de arriba para navegar por la pagina</p>
     </div>
-  </kendo-pdf-export>
-  <button kendo-button (click)="pdf.saveAs('document.pdf')"> PDF</button>
     <!-- <div class="card">
       <img class="img-thumbnail"   src="./assets/imagenes/Adivina.jpg" alt="Avatar" style="width:100%">
       <h1>Adivina El Numero</h1>

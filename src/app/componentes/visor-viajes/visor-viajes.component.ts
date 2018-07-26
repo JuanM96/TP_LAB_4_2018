@@ -5,6 +5,7 @@ import { ViajeServiceService } from '../../servicios/viaje-service.service';
 import { UsuarioServiceService } from '../../servicios/usuario-service.service';
 import { VehiculoServiceService } from '../../servicios/vehiculo-service.service';
 import { AsignarModalComponent } from '../asignar-modal/asignar-modal.component';
+import { FinalizarViajeModalComponent } from '../finalizar-viaje-modal/finalizar-viaje-modal.component';
 
 @Component({
   selector: 'app-visor-viajes',
@@ -24,8 +25,18 @@ export class VisorViajesComponent implements OnInit {
   idCliente:number;
   idVehiculo:number;
   filtrarEstado:string;
+  perfil:string = localStorage.getItem('perfil');
   constructor(public dialog:MatDialog,public viajeService:ViajeServiceService,public usuarioService:UsuarioServiceService,public vehiculoService:VehiculoServiceService,public snackBar:MatSnackBar) {
-    this.filtrarEstado = "Todos";
+    if (this.perfil == 'admin') {
+      this.filtrarEstado = "Todos";
+    }
+    else if (this.perfil == 'cliente') {
+      this.filtrarEstado = "EnViaje";
+    }
+    else if (this.perfil == 'chofer') {
+      this.filtrarEstado = "AsignadosAMi";
+    }
+    console.log(this.perfil);
     this.usuarioService.traerListaCompleta(localStorage.getItem('token')).then(datos => {
       this.listadoUsuarios = datos;
       console.info(this.listadoUsuarios);
@@ -102,152 +113,431 @@ export class VisorViajesComponent implements OnInit {
     });
   }
   filtrarListado(){
-    switch (this.filtrarEstado) {
-      case 'EnViaje':
-        this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"En Viaje").then(datos =>{
-          console.info(datos);
-          datos.forEach(viaje => {
-            let nombreChofer;
-            if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
-              this.idChofer = viaje.idChofer;
-              let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
-              console.info(nombreChofer);
-              viaje.idChofer = nombreChofer.nombre;
-            }
-            else{
-              console.log(viaje.idChofer);
-              viaje.idChofer = "Sin Chofer";
-            }
-            if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
-              this.idVehiculo = viaje.idVehiculo;
-              let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
-              viaje.idVehiculo = vehiculo;
-            }
-            else{
-              viaje.idVehiculo = "Sin Vehiculo";
-            }
-            let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
-            this.idCliente = viaje.idCliente;
-            viaje.idCliente = nombreCliente.nombre;
-            
-            
-            this.listado.push(viaje);
-          });
-          this.agregarDirAListado();
-        }).catch(error =>{
-          console.log(error)
-        })
-        break;
-      case 'Cancelado':
-        this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Cancelado").then(datos =>{
-          console.info(datos);
-          datos.forEach(viaje => {
-            let nombreChofer;
-            if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
-              this.idChofer = viaje.idChofer;
-              let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
-              console.info(nombreChofer);
-              viaje.idChofer = nombreChofer.nombre;
-            }
-            else{
-              console.log(viaje.idChofer);
-              viaje.idChofer = "Sin Chofer";
-            }
-            if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
-              this.idVehiculo = viaje.idVehiculo;
-              let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
-              viaje.idVehiculo = vehiculo;
-            }
-            else{
-              viaje.idVehiculo = "Sin Vehiculo";
-            }
-            let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
-            this.idCliente = viaje.idCliente;
-            viaje.idCliente = nombreCliente.nombre;
-            
-            
-            this.listado.push(viaje);
-          });
-          this.agregarDirAListado();
-        }).catch(error =>{
-          console.log(error)
-        })
-        break;
-      case 'Pendiente':
-        this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Pendiente").then(datos =>{
-          console.info(datos);
-          datos.forEach(viaje => {
-            let nombreChofer;
-            if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
-              this.idChofer = viaje.idChofer;
-              let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
-              console.info(nombreChofer);
-              viaje.idChofer = nombreChofer.nombre;
-            }
-            else{
-              console.log(viaje.idChofer);
-              viaje.idChofer = "Sin Chofer";
-            }
-            if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
-              this.idVehiculo = viaje.idVehiculo;
-              let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
-              viaje.idVehiculo = vehiculo;
-            }
-            else{
-              viaje.idVehiculo = "Sin Vehiculo";
-            }
-            let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
-            this.idCliente = viaje.idCliente;
-            viaje.idCliente = nombreCliente.nombre;
-            
-            
-            this.listado.push(viaje);
-          });
-          this.agregarDirAListado();
-
-        }).catch(error =>{
-          console.log(error)
-        })
-        break;
-      case 'Todos':
-        this.viajeService.traerListaCompleta(localStorage.getItem('token')).then(datos =>{
-          console.info(datos);
-          datos.forEach(viaje => {
-            let nombreChofer;
-            if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
-              this.idChofer = viaje.idChofer;
-              let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
-              console.info(nombreChofer);
-              viaje.idChofer = nombreChofer.nombre;
-            }
-            else{
-              console.log(viaje.idChofer);
-              viaje.idChofer = "Sin Chofer";
-            }
-            if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
-              this.idVehiculo = viaje.idVehiculo;
-              let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
-              viaje.idVehiculo = vehiculo;
-            }
-            else{
-              viaje.idVehiculo = "Sin Vehiculo";
-            }
-            let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
-            this.idCliente = viaje.idCliente;
-            viaje.idCliente = nombreCliente.nombre;
-            
-            
-            this.listado.push(viaje);
-          });
-          this.agregarDirAListado();
-        }).catch(error =>{
-          console.log(error)
-        })
-        break;
-    
-      default:
-        break;
+    if (this.perfil == "admin") {
+      switch (this.filtrarEstado) {
+        case 'EnViaje':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"En Viaje").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              let nombreChofer;
+              if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                this.idChofer = viaje.idChofer;
+                let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                console.info(nombreChofer);
+                viaje.idChofer = nombreChofer.nombre;
+              }
+              else{
+                console.log(viaje.idChofer);
+                viaje.idChofer = "Sin Chofer";
+              }
+              if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                this.idVehiculo = viaje.idVehiculo;
+                let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                viaje.idVehiculo = vehiculo;
+              }
+              else{
+                viaje.idVehiculo = "Sin Vehiculo";
+              }
+              let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+              this.idCliente = viaje.idCliente;
+              viaje.idCliente = nombreCliente.nombre;
+              
+              
+              this.listado.push(viaje);
+            });
+            this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        case 'Cancelado':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Cancelado").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              let nombreChofer;
+              if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                this.idChofer = viaje.idChofer;
+                let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                console.info(nombreChofer);
+                viaje.idChofer = nombreChofer.nombre;
+              }
+              else{
+                console.log(viaje.idChofer);
+                viaje.idChofer = "Sin Chofer";
+              }
+              if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                this.idVehiculo = viaje.idVehiculo;
+                let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                viaje.idVehiculo = vehiculo;
+              }
+              else{
+                viaje.idVehiculo = "Sin Vehiculo";
+              }
+              let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+              this.idCliente = viaje.idCliente;
+              viaje.idCliente = nombreCliente.nombre;
+              
+              
+              this.listado.push(viaje);
+            });
+            this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        case 'Pendiente':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Pendiente").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              let nombreChofer;
+              if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                this.idChofer = viaje.idChofer;
+                let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                console.info(nombreChofer);
+                viaje.idChofer = nombreChofer.nombre;
+              }
+              else{
+                console.log(viaje.idChofer);
+                viaje.idChofer = "Sin Chofer";
+              }
+              if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                this.idVehiculo = viaje.idVehiculo;
+                let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                viaje.idVehiculo = vehiculo;
+              }
+              else{
+                viaje.idVehiculo = "Sin Vehiculo";
+              }
+              let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+              this.idCliente = viaje.idCliente;
+              viaje.idCliente = nombreCliente.nombre;
+              
+              
+              this.listado.push(viaje);
+            });
+            this.agregarDirAListado();
+  
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        case 'Todos':
+          this.viajeService.traerListaCompleta(localStorage.getItem('token')).then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              let nombreChofer;
+              if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                this.idChofer = viaje.idChofer;
+                let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                console.info(nombreChofer);
+                viaje.idChofer = nombreChofer.nombre;
+              }
+              else{
+                console.log(viaje.idChofer);
+                viaje.idChofer = "Sin Chofer";
+              }
+              if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                this.idVehiculo = viaje.idVehiculo;
+                let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                viaje.idVehiculo = vehiculo;
+              }
+              else{
+                viaje.idVehiculo = "Sin Vehiculo";
+              }
+              let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+              this.idCliente = viaje.idCliente;
+              viaje.idCliente = nombreCliente.nombre;
+              
+              
+              this.listado.push(viaje);
+            });
+            this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+      
+        default:
+          break;
+      }
     }
+    else if (this.perfil == "chofer") {
+      switch (this.filtrarEstado) {
+        case 'AsignadosAMi':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"En Viaje").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              if (viaje.idChofer == localStorage.getItem('id')) {
+                let nombreChofer;
+                if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                  this.idChofer = viaje.idChofer;
+                  let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                  console.info(nombreChofer);
+                  viaje.idChofer = nombreChofer.nombre;
+                }
+                else{
+                  console.log(viaje.idChofer);
+                  viaje.idChofer = "Sin Chofer";
+                }
+                if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                  this.idVehiculo = viaje.idVehiculo;
+                  let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                  viaje.idVehiculo = vehiculo;
+                }
+                else{
+                  viaje.idVehiculo = "Sin Vehiculo";
+                }
+                let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+                this.idCliente = viaje.idCliente;
+                viaje.idCliente = nombreCliente.nombre;
+                
+                
+                this.listado.push(viaje);
+              }
+              
+            });
+            this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        case 'Cancelado':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Cancelado").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              if (viaje.idChofer == localStorage.getItem('id')) {
+                let nombreChofer;
+                if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                  this.idChofer = viaje.idChofer;
+                  let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                  console.info(nombreChofer);
+                  viaje.idChofer = nombreChofer.nombre;
+                }
+                else{
+                  console.log(viaje.idChofer);
+                  viaje.idChofer = "Sin Chofer";
+                }
+                if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                  this.idVehiculo = viaje.idVehiculo;
+                  let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                  viaje.idVehiculo = vehiculo;
+                }
+                else{
+                  viaje.idVehiculo = "Sin Vehiculo";
+                }
+                let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+                this.idCliente = viaje.idCliente;
+                viaje.idCliente = nombreCliente.nombre;
+                
+                
+                this.listado.push(viaje);
+              }
+            });
+            this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        case 'Finalizado':
+        this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Finalizado").then(datos =>{
+          console.info(datos);
+          datos.forEach(viaje => {
+            if (viaje.idChofer == localStorage.getItem('id')) {
+              let nombreChofer;
+              if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                this.idChofer = viaje.idChofer;
+                let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                console.info(nombreChofer);
+                viaje.idChofer = nombreChofer.nombre;
+              }
+              else{
+                console.log(viaje.idChofer);
+                viaje.idChofer = "Sin Chofer";
+              }
+              if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                this.idVehiculo = viaje.idVehiculo;
+                let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                viaje.idVehiculo = vehiculo;
+              }
+              else{
+                viaje.idVehiculo = "Sin Vehiculo";
+              }
+              let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+              this.idCliente = viaje.idCliente;
+              viaje.idCliente = nombreCliente.nombre;
+              
+              
+              this.listado.push(viaje);
+            }
+          });
+          this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        
+        default:
+          break;
+      }
+    }
+    else if (this.perfil == "cliente") {
+      switch (this.filtrarEstado) {
+        case 'EnViaje':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"En Viaje").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              if (viaje.idCliente == localStorage.getItem('id')) {
+                let nombreChofer;
+                if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                  this.idChofer = viaje.idChofer;
+                  let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                  console.info(nombreChofer);
+                  viaje.idChofer = nombreChofer.nombre;
+                }
+                else{
+                  console.log(viaje.idChofer);
+                  viaje.idChofer = "Sin Chofer";
+                }
+                if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                  this.idVehiculo = viaje.idVehiculo;
+                  let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                  viaje.idVehiculo = vehiculo;
+                }
+                else{
+                  viaje.idVehiculo = "Sin Vehiculo";
+                }
+                let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+                this.idCliente = viaje.idCliente;
+                viaje.idCliente = nombreCliente.nombre;
+                
+                
+                this.listado.push(viaje);
+              }
+            });
+            this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        case 'Cancelado':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Cancelado").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+            if (viaje.idCliente == localStorage.getItem('id')) {
+                let nombreChofer;
+                if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                  this.idChofer = viaje.idChofer;
+                  let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                  console.info(nombreChofer);
+                  viaje.idChofer = nombreChofer.nombre;
+                }
+                else{
+                  console.log(viaje.idChofer);
+                  viaje.idChofer = "Sin Chofer";
+                }
+                if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                  this.idVehiculo = viaje.idVehiculo;
+                  let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                  viaje.idVehiculo = vehiculo;
+                }
+                else{
+                  viaje.idVehiculo = "Sin Vehiculo";
+                }
+                let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+                this.idCliente = viaje.idCliente;
+                viaje.idCliente = nombreCliente.nombre;
+                
+                
+                this.listado.push(viaje);
+              }
+            });
+            this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+        case 'Pendiente':
+          this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Pendiente").then(datos =>{
+            console.info(datos);
+            datos.forEach(viaje => {
+              if (viaje.idCliente == localStorage.getItem('id')) {
+                let nombreChofer;
+                if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                  this.idChofer = viaje.idChofer;
+                  let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                  console.info(nombreChofer);
+                  viaje.idChofer = nombreChofer.nombre;
+                }
+                else{
+                  console.log(viaje.idChofer);
+                  viaje.idChofer = "Sin Chofer";
+                }
+                if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                  this.idVehiculo = viaje.idVehiculo;
+                  let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                  viaje.idVehiculo = vehiculo;
+                }
+                else{
+                  viaje.idVehiculo = "Sin Vehiculo";
+                }
+                let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+                this.idCliente = viaje.idCliente;
+                viaje.idCliente = nombreCliente.nombre;
+                
+                
+                this.listado.push(viaje);
+              }
+            });
+            this.agregarDirAListado();
+  
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+
+          case 'Finalizado':
+        this.viajeService.traerTodosPorEstado(localStorage.getItem('token'),"Finalizado").then(datos =>{
+          console.info(datos);
+          datos.forEach(viaje => {
+            if (viaje.idCliente == localStorage.getItem('id')) {
+              let nombreChofer;
+              if (viaje.idChofer != 0 && viaje.idChofer != "Sin Chofer") {
+                this.idChofer = viaje.idChofer;
+                let nombreChofer = this.buscarNombreId(viaje.idChofer,'usuario');
+                console.info(nombreChofer);
+                viaje.idChofer = nombreChofer.nombre;
+              }
+              else{
+                console.log(viaje.idChofer);
+                viaje.idChofer = "Sin Chofer";
+              }
+              if (viaje.idVehiculo != 0 && viaje.idVehiculo != "Sin Vehiculo") {
+                this.idVehiculo = viaje.idVehiculo;
+                let vehiculo = this.buscarNombreId(viaje.idVehiculo,'vehiculo');
+                viaje.idVehiculo = vehiculo;
+              }
+              else{
+                viaje.idVehiculo = "Sin Vehiculo";
+              }
+              let nombreCliente = this.buscarNombreId(viaje.idCliente,'usuario');
+              this.idCliente = viaje.idCliente;
+              viaje.idCliente = nombreCliente.nombre;
+              
+              
+              this.listado.push(viaje);
+            }
+          });
+          this.agregarDirAListado();
+          }).catch(error =>{
+            console.log(error)
+          })
+          break;
+      
+        default:
+          break;
+      }
+    }
+    
   }
   buscarNombreId(id:number,clase:string){
     let ret:any;
@@ -336,5 +626,17 @@ export class VisorViajesComponent implements OnInit {
       lat:lat2,
       lng:lng2
     };
+  }
+  finalizarViaje(idViaje:number,montoAprox:number){
+    const dialogRef = this.dialog.open(FinalizarViajeModalComponent, {
+      width: '300px',
+      data: {idViaje:idViaje, monto:montoAprox}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.info(result);
+      this.actualizarListado();
+    });
   }
 }

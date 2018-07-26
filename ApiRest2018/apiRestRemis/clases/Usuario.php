@@ -108,7 +108,7 @@
             $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
             $itsOk = $consulta->execute();
             if ($itsOk) {
-                $ret['respuesta'] = "El Chofer Se Modifico Exitosamente";
+                $ret['respuesta'] = "Usted Esta Ahora Trabajando";
             }
             else {
                 $ret['respuesta'] = "ERROR";
@@ -125,7 +125,7 @@
             $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
             $itsOk = $consulta->execute();
             if ($itsOk) {
-                $ret['respuesta'] = "El Chofer Se Modifico Exitosamente";
+                $ret['respuesta'] = "Usted Finalizo Su Trabajo";
             }
             else {
                 $ret['respuesta'] = "ERROR";

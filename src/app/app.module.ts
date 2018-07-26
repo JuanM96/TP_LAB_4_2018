@@ -65,6 +65,8 @@ import { AmazingTimePickerModule } from 'amazing-time-picker'; // this line you 
 import { ArchivoServiceService } from './servicios/archivo-service.service';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { PdfpreviewComponent } from './componentes/pdfpreview/pdfpreview.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { FinalizarViajeModalComponent } from './componentes/finalizar-viaje-modal/finalizar-viaje-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,6 +92,7 @@ import { PdfpreviewComponent } from './componentes/pdfpreview/pdfpreview.compone
     AsignarModalComponent,
     EstadisticasComponent,
     PdfpreviewComponent,
+    FinalizarViajeModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,6 +125,7 @@ import { PdfpreviewComponent } from './componentes/pdfpreview/pdfpreview.compone
     MatSliderModule,
     ChartsModule,
     PDFExportModule,
+    CollapseModule
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)

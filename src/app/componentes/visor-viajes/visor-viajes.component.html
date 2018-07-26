@@ -2,12 +2,27 @@
     <div class="filtro">
       <h1>Visor De Viajes</h1>
       <p>Filtrar: 
-          <mat-form-field>
+          <mat-form-field *ngIf = "perfil == 'admin'">
             <mat-select placeholder="" [(value)]="filtrarEstado" >
               <mat-option value="Todos" (click)="actualizarListado()">Todos</mat-option>
               <mat-option value="Pendiente" (click)="actualizarListado()">Pendiente</mat-option>
               <mat-option value="EnViaje" (click)="actualizarListado()">En Viaje</mat-option>
               <mat-option value="Cancelado" (click)="actualizarListado()">Cancelado</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field *ngIf = "perfil == 'cliente'">
+            <mat-select placeholder="" [(value)]="filtrarEstado" >
+              <mat-option value="Pendiente" (click)="actualizarListado()">Pendiente</mat-option>
+              <mat-option value="EnViaje" (click)="actualizarListado()">En Viaje</mat-option>
+              <mat-option value="Cancelado" (click)="actualizarListado()">Cancelado</mat-option>
+              <mat-option value="Finalizado" (click)="actualizarListado()">Finalizado</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field *ngIf = "perfil == 'chofer'">
+            <mat-select placeholder="" [(value)]="filtrarEstado" >
+              <mat-option value="AsignadosAMi" (click)="actualizarListado()">En Viaje</mat-option>
+              <mat-option value="Cancelado" (click)="actualizarListado()">Cancelado</mat-option>
+              <mat-option value="Finalizado" (click)="actualizarListado()">Finalizado</mat-option>
             </mat-select>
           </mat-form-field>
       </p>
@@ -56,16 +71,17 @@
           <td class="datos">{{viaje.estado}}</td>
         </tr>
       </table>
-      <p>
-        <button mat-raised-button color="warn"  (click)="desasignarChofer(viaje)" *ngIf="viaje.idChofer != 'Sin Chofer'">Desasignar Chofer</button>
-        <button mat-raised-button color="warn"  (click)="asignarChofer(viaje.id)" *ngIf="viaje.idChofer == 'Sin Chofer' && viaje.idVehiculo != 'Sin Vehiculo'">Asignar Chofer</button>
-        <button mat-raised-button color="warn"  (click)="desasignarVehiculo(viaje)" *ngIf="viaje.idVehiculo != 'Sin Vehiculo'">Desasignar Vehiculo</button>
-        <button mat-raised-button color="warn"  (click)="asignarVehiculo(viaje.id)" *ngIf="viaje.idVehiculo == 'Sin Vehiculo'">Asignar Vehiculo</button>
+      <p *ngIf="viaje.estado != 'Cancelado'">
+        <button mat-raised-button color="warn"  (click)="desasignarChofer(viaje)" *ngIf="viaje.idChofer != 'Sin Chofer' && perfil == 'admin'">Desasignar Chofer</button>
+        <button mat-raised-button color="warn"  (click)="asignarChofer(viaje.id)" *ngIf="viaje.idChofer == 'Sin Chofer' && viaje.idVehiculo != 'Sin Vehiculo' && perfil == 'admin'">Asignar Chofer</button>
+        <button mat-raised-button color="warn"  (click)="desasignarVehiculo(viaje)" *ngIf="viaje.idVehiculo != 'Sin Vehiculo' && perfil == 'admin'">Desasignar Vehiculo</button>
+        <button mat-raised-button color="warn"  (click)="asignarVehiculo(viaje.id)" *ngIf="viaje.idVehiculo == 'Sin Vehiculo' && perfil == 'admin'">Asignar Vehiculo</button>
       </p>
       <p>
-        <button mat-raised-button color="warn"  (click)="realizarEncuesta(viaje.id)" *ngIf="viaje.encuesta == 0 && viaje.estado == 'Finalizado'">Realizar Encuesta</button>
+        <button mat-raised-button color="warn"  (click)="realizarEncuesta(viaje.id)" *ngIf="viaje.encuesta == 0 && viaje.estado == 'Finalizado' && perfil == 'cliente'">Realizar Encuesta</button>
       </p>
-        <button mat-raised-button color="warn"  (click)="cancelarViaje(viaje.id)" *ngIf="viaje.idChofer == 'Sin Chofer' && viaje.estado != 'Cancelado'">Cancelar Viaje</button>
+        <button mat-raised-button color="warn"  (click)="cancelarViaje(viaje.id)" *ngIf="viaje.idChofer == 'Sin Chofer' && viaje.estado != 'Cancelado' && perfil != 'chofer'">Cancelar Viaje</button>
+        <button mat-raised-button color="warn"  (click)="finalizarViaje(viaje.id,viaje.monto)" *ngIf="perfil == 'chofer' && viaje.estado == 'En Viaje' && perfil == 'chofer'">Finalizar Viaje</button>
       
     </div>
   </div>

@@ -1,32 +1,4 @@
-<!--div>
-    <button routerLink="/Principal">Principal</button>
-    <button (click)="Juego('Adivina')">Adivina</button>
-    <button (click)="Juego('Agilidad')">Agilidad</button>
-    <button (click)="Juego('AdivinaMasListado')">Adivina+listado</button>
-    <button (click)="Juego('AgilidadaMasListado')">Agilidad+listado</button>  
-    <button routerLink="/error">Error</button>
-  
-</div-->
-
-<!--nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" routerLink="/Principal">Inicio</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a routerLink="/Juegos">Juegos</a></li>
-        <li><a data-toggle="tooltip" title="Hooray!" (click)="Juego('Adivina')">Adivina</a></li>
-        <li><a  (click)="Juego('Agilidad')">Agilidad</a></li>
-        <li><a  (click)="Juego('AdivinaMasListado')">Adivina+listado</a></li>
-        <li><a  (click)="Juego('AgilidadaMasListado')">Agilidad+listado</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mis Datos</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-        </ul>
-    </div>
-  </nav-->
-  <nav class="navbar-default">
+  <!-- <nav class="navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -34,36 +6,78 @@
                                   
           </button>
           <a class="navbar-brand" routerLink="/Remiseria">Inicio</a>
-          <!-- <button mat-raised-button color="warn" class="navbar-button" routerLink="/Juegos">Inicio</button> -->
           
         </div>
         <div class="collapse navbar-collapse nav navbar-nav" id="myNavbar">
              <ul class="nav navbar-nav">
-                <li><a   class="navbar-button" routerLink="/Remiseria/estadisticas">Estadisticas</a></li>
-                <li><a   class="navbar-button" routerLink="/Remiseria/abmChoferes">Choferes</a></li>
-                <li><a   class="navbar-button" routerLink="/Remiseria/abmClientes">Clientes</a></li>
-                <li><a   class="navbar-button" routerLink="/Remiseria/abmVehiculos">Vehiculos</a></li>
-                <li><a   class="navbar-button" routerLink="/Remiseria/visorViajes">Visor De Viajes</a></li>
+                <li><a   class="navbar-button" routerLink="/Remiseria/estadisticas" *ngIf="perfil == 'admin'">Estadisticas</a></li>
+                <li><a   class="navbar-button" routerLink="/Remiseria/abmChoferes" *ngIf="perfil == 'admin'">Choferes</a></li>
+                <li><a   class="navbar-button" routerLink="/Remiseria/abmClientes" *ngIf="perfil == 'admin'">Clientes</a></li>
+                <li><a   class="navbar-button" routerLink="/Remiseria/abmVehiculos" *ngIf="perfil == 'admin'">Vehiculos</a></li>
+                <li><a   class="navbar-button" routerLink="/Remiseria/visorViajes" *ngIf="perfil == 'admin'">Visor De Viajes</a></li>
+                <li><a   class="navbar-button" routerLink="/Remiseria/visorViajes" *ngIf="perfil == 'chofer'">Visor De Viajes</a></li>
+                <li><a   class="navbar-button" routerLink="/Remiseria/visorViajes" *ngIf="perfil == 'cliente'">Visor De Viajes</a></li>
                 <li><a   class="navbar-button" (click)="openDialog()">Nuevo Viaje</a></li>
-                <!-- <li><a   class="navbar-button" routerLink="" (click)="Juego('Adivina')">Adivina</a></li>
-                <li><a    class="navbar-button" routerLink="" (click)="Juego('Agilidad')">Agilidad</a></li>
-                <li><a    class="navbar-button" routerLink="" (click)="Juego('Anagrama')">Anagrama</a></li>
-                <li><a    class="navbar-button" routerLink=""(click)="Juego('PiedraPapelTijera')">Piedra, Papel Y Tijera</a></li>
-                <li><a    class="navbar-button" routerLink=""(click)="Juego('TicTacToe')">Tic Tac Toe</a></li>
-                <li><a    class="navbar-button" routerLink=""(click)="Juego('Historial')">Historial De Jugadas</a></li> -->
 
               </ul>
               <ul class="nav navbar-nav navbar-right no-margin pull-right">  
-                <li><a    class="navbar-button-right" routerLink="" (click)="Juego('QuienSoy')">Quien Soy?</a></li>
-                <li><a    class="navbar-button-right" routerLink="" (click)="Salir()">Salir</a></li>
+                <li><a    class="navbar-button-right" routerLink="" (click)="Salir()" *ngIf="perfil == 'admin'">Salir</a></li>
               </ul>
-          <!-- <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Adivina')">Adivina</button>
-          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Agilidad')">Agilidad</button>
-          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Anagrama')">Anagrama</button>
-          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('PiedraPapelTijera')">Piedra, Papel Y Tijera</button>
-          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('TicTacToe')">Tic Tac Toe</button>
-          <button mat-raised-button color="warn" class="navbar-button" (click)="Juego('Historial')">Historial De Jugadas</button>
-          <button mat-raised-button color="warn" class="navbar-button" (click)="Salir()">Salir</button>  -->
         </div>
+      </div>
+    </nav> -->
+    
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">
+        Brand
+      </a>
+    
+      <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Item 1</a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link" href="#">Item 2</a>
+          </li>
+        </ul>
+      </div>
+    </nav> -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <!-- <li><a class="navbar-toggle collapsed" routerLink="" (click)="Salir()" *ngIf="perfil == 'admin'">Salir</a></li> -->
+          <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" routerLink="/Remiseria">Inicio</a>
+        </div>
+        <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+          <ul class="nav navbar-nav">
+            <li><a   class="navbar-button" routerLink="/Remiseria/estadisticas" *ngIf="perfil == 'admin'">Estadisticas</a></li>
+            <li><a   class="navbar-button" routerLink="/Remiseria/abmChoferes" *ngIf="perfil == 'admin'">Choferes</a></li>
+            <li><a   class="navbar-button" routerLink="/Remiseria/abmClientes" *ngIf="perfil == 'admin'">Clientes</a></li>
+            <li><a   class="navbar-button" routerLink="/Remiseria/abmVehiculos" *ngIf="perfil == 'admin'">Vehiculos</a></li>
+            <li><a   class="navbar-button" routerLink="/Remiseria/visorViajes" *ngIf="perfil == 'admin'">Visor De Viajes</a></li>
+            <li><a   class="navbar-button" routerLink="/Remiseria/visorViajes" *ngIf="perfil == 'chofer' && estado == 'Trabajando'">Visor De Viajes</a></li>
+            <li><a   class="navbar-button" (click)="empezarATrabajar()" *ngIf="perfil == 'chofer' && estado == 'En Casa'">Empezar a Trabajar</a></li>
+            <li><a   class="navbar-button" (click)="dejarDeTrabajar()" *ngIf="perfil == 'chofer' && estado == 'Trabajando'">Dejar de Trabajar</a></li>
+            <li><a   class="navbar-button" routerLink="/Remiseria/visorViajes" *ngIf="perfil == 'cliente'">Visor De Viajes</a></li>
+            <li><a   class="navbar-button" (click)="openDialog()" *ngIf="perfil != 'chofer'">Nuevo Viaje</a></li>
+            <li><a    class="navbar-button" routerLink="" (click)="Salir()">Salir</a></li>
+          </ul>
+        </div>
+        <!-- <ul class="nav navbar-nav navbar-right no-margin pull-right">  
+          <li><a    class="navbar-button navbar-button-right" routerLink="" (click)="Salir()" *ngIf="perfil == 'admin'">Salir</a></li>
+        </ul> -->
       </div>
     </nav>

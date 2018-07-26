@@ -3,8 +3,8 @@ import { MiHttpService } from './mi-http.service';
 
 @Injectable()
 export class EncuestaServiceService {
-  url:string = "https://juanmurciautn.000webhostapp.com";
-  //url:string = "http://localhost";
+  //url:string = "https://juanmurciautn.000webhostapp.com";
+  url:string = "http://localhost";
   constructor(public miHttp:MiHttpService) { }
   public traerListaCompleta(token:string){
     return this.miHttp.httpGetPromise(this.url /*:8080*/+"/apiRestRemis/encuesta/traerTodos",token)
