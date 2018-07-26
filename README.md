@@ -11,4 +11,4 @@ El Chofer ingresa a la app y tiene que ponerse a trabajar mediante un boton en e
 
 # El inicio de la app se ve de la siguiente manera.
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://imgur.com/a/ucm5kaV)
